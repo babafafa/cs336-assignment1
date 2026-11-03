@@ -1,5 +1,6 @@
 import torch
 import os
+
 def save_checkpoint(model, optimizer, iteration, out):
     checkpoint = {
         "model": model.state_dict(),

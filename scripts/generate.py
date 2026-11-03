@@ -1,13 +1,8 @@
 import torch
 import numpy as np
-import os
-import time
-import argparse
-from cs336_basics.model import (
-    TransformerLM, AdamW, get_batch, 
-    cross_entropy, lr_cosine_schedule, 
-    gradient_clipping, save_checkpoint, load_checkpoint
-)
+from cs336_basics.nn_utils import softmax
+
+
 def top_p_filter(probs, top_p):
     if top_p >= 1.0:
         return probs
@@ -32,13 +27,26 @@ def top_p_filter(probs, top_p):
     filtered_probs.scatter_(dim=-1, index=sorted_indices, src=sorted_probs)
     
     return filtered_probs
-
-def generate(model, input_ids, max_new_tokens, temperature, top_p,eos_token_id):
-    logits=model(input_ids)
-    next_token_logits=logits[:,-1,:]
-    next_token_logits=next_token_logits/temperature
-    next_token_logits=top_p_filter(next_token_logits,top_p)
-    probs=softmax(next_token_logits,dim=-1)
-    next_token = torch.multinomial(probs, num_samples=1)
     
-    return next_token
+@torch.no_grad()
+def generate(model, input_ids, max_new_tokens, temperature=1.0, top_p=1.0, eos_token_id=None):
+    """
+    input_ids: 形状 (batch_size, seq_len) 的张量
+    """
+    model.eval()
+    
+    # 容错处理：防止温度设为 0 导致除零报错
+    if temperature <= 0:
+        temperature = 1e-5
+    for _ in range(max_new_tokens):
+        logits=model(input_ids)
+        next_token_logits=logits[:,-1,:]
+        next_token_logits=next_token_logits/temperature
+        probs=softmax(next_token_logits,dim=-1)
+        next_token_logits=top_p_filter(next_token_logits,top_p)
+    
+        next_token = torch.multinomial(probs, num_samples=1)
+        input_ids = torch.cat([input_ids, next_token], dim=-1)
+        if eos_token_id is not Node and (next_token==eos_token_id).all():
+            break;
+    return input_ids

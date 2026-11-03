@@ -1,6 +1,6 @@
 import torch
 import math
-
+import numpy as np
 
 def get_batch(x, batch_size, context_length, device):
     # 1. 随机生成 batch_size 个起点位置
