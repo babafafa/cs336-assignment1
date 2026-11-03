@@ -30,8 +30,8 @@ class ScheduleConfig:
 
 @dataclass
 class DataConfig:
-    train_path: str = "tinystories_train_ids.npy"
-    val_path: str = "tinystories_valid_ids.npy"
+    train_path: str = "/root/autodl-tmp/assignment1-basics-main/data/processed/ts_train_ids.npy"
+    val_path: str = "/root/autodl-tmp/assignment1-basics-main/data/processed/ts_valid_ids.npy"
     batch_size: int = 32
 
 @dataclass
