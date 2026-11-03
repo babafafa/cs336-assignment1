@@ -1,0 +1,44 @@
+import torch
+import numpy as np
+import os
+import time
+import argparse
+from cs336_basics.model import (
+    TransformerLM, AdamW, get_batch, 
+    cross_entropy, lr_cosine_schedule, 
+    gradient_clipping, save_checkpoint, load_checkpoint
+)
+def top_p_filter(probs, top_p):
+    if top_p >= 1.0:
+        return probs
+    
+    # 1. 降序排序
+    sorted_probs, sorted_indices = torch.sort(probs, dim=-1, descending=True)
+    
+    # 2. 计算累加和
+    cumsum_probs = torch.cumsum(sorted_probs, dim=-1)
+    
+    # 3. 找到需要砍掉的词
+    mask = (cumsum_probs - sorted_probs) > top_p
+    
+    # 4. 将不要的词置零
+    sorted_probs[mask] = 0.0
+    
+    # 5. 重新归一化
+    sorted_probs = sorted_probs / sorted_probs.sum(dim=-1, keepdim=True)
+    
+    # 6. 还原回原来的词汇顺序
+    filtered_probs = torch.zeros_like(probs)
+    filtered_probs.scatter_(dim=-1, index=sorted_indices, src=sorted_probs)
+    
+    return filtered_probs
+
+def generate(model, input_ids, max_new_tokens, temperature, top_p,eos_token_id):
+    logits=model(input_ids)
+    next_token_logits=logits[:,-1,:]
+    next_token_logits=next_token_logits/temperature
+    next_token_logits=top_p_filter(next_token_logits,top_p)
+    probs=softmax(next_token_logits,dim=-1)
+    next_token = torch.multinomial(probs, num_samples=1)
+    
+    return next_token
