@@ -38,30 +38,42 @@ def generate(model, input_ids, max_new_tokens, temperature=1.0, top_p=1.0, eos_t
     # 容错处理：防止温度设为 0 导致除零报错
     if temperature <= 0:
         temperature = 1e-5
-    finished_mask = torch.zeros(batch_size, dtype=torch.bool, device=device)
-    for _ in range(max_new_tokens):
-        current_input_ids = input_ids[:, -model.context_length:] 
-        logits=model(current_input_ids)
-        next_token_logits=logits[:,-1,:]
-        next_token_logits=next_token_logits/temperature
-        probs=softmax(next_token_logits,dim=-1)
-        probs=top_p_filter(probs,top_p)
+        
+    batch_size = input_ids.shape[0]
+    device = input_ids.device
     
+    if eos_token_id is not None:
+        finished_mask = torch.zeros(batch_size, dtype=torch.bool, device=device)
+    
+    for _ in range(max_new_tokens):
+        # 滑动窗口截断，防止 context_length 溢出
+        current_input_ids = input_ids[:, -model.context_length:] 
+        
+        logits = model(current_input_ids)
+        next_token_logits = logits[:, -1, :]
+        next_token_logits = next_token_logits / temperature
+        
+        probs = softmax(next_token_logits, dim=-1)
+        probs = top_p_filter(probs, top_p)
+        
         next_token = torch.multinomial(probs, num_samples=1)
-            next_token = torch.where(finished_mask.unsqueeze(1), 
-                             torch.tensor(eos_token_id, device=device), 
-                             next_token)
-                             
-        # 更新结束标记
-        finished_mask = finished_mask | (next_token.squeeze(1) == eos_token_id)
         
-        # 拼接
+   
+        if eos_token_id is not None:
+      
+            next_token = torch.where(
+                finished_mask.unsqueeze(1), 
+                torch.tensor(eos_token_id, device=device), 
+                next_token
+            )
+            
+            # 更新结束标记
+            finished_mask = finished_mask | (next_token.squeeze(1) == eos_token_id)
+            
+        # 拼接新生成的 token
         input_ids = torch.cat([input_ids, next_token], dim=-1)
         
-        # 如果 batch 里所有句子都结束了，提前 break
-        if finished_mask.all():
+        if eos_token_id is not None and finished_mask.all():
             break
-        input_ids = torch.cat([input_ids, next_token], dim=-1)
-        if eos_token_id is not None and (next_token==eos_token_id).all().item():
-            break;
+
     return input_ids
