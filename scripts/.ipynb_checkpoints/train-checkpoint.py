@@ -57,7 +57,7 @@ def train():
 
     if not os.path.exists(cfg.data.train_path):
         print(f"找不到数据文件 {cfg.data.train_path}，请先确认路径！")
-        return
+        raise FileNotFoundError(f"找不到训练数据文件：{cfg.data.train_path}。请检查路径！")
         
     val_data = None
     if os.path.exists(cfg.data.val_path):
@@ -95,12 +95,13 @@ def train():
         loss.backward()
         
     
-        gradient_clipping(model.parameters(), cfg.optimizer.grad_clip)
+        grad_norm=gradient_clipping(model.parameters(), cfg.optimizer.grad_clip)
         optimizer.step()
         
         if step % cfg.log_interval == 0:
             elapsed = time.time() - start_time
-            print(f"Step {step:05d} | Loss: {loss.item():.4f} | LR: {current_lr:.6f} | Time: {elapsed:.1f}s")
+            print(f"Step {step:05d} | Loss: {loss.item():.4f} | Grad Norm: {grad_norm:.2f}| LR: {current_lr:.6f} | Time: {elapsed:.1f}s")
+           
             
         if val_data is not None and step > 0 and step % cfg.eval_interval == 0:
             val_loss = evaluate(

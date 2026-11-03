@@ -24,12 +24,11 @@ def lr_cosine_schedule(
     else:
         return min_learning_rate
 
-def gradient_clipping(parameters, max_l2_norm: float) -> None:
-
+def gradient_clipping(parameters, max_l2_norm: float) -> float:
     params = [p for p in parameters if p.grad is not None]
     
     if len(params) == 0:
-        return
+        return 0.0  # 如果没有梯度，返回 0
 
     total_norm_sq = params[0].grad.pow(2).sum()
 
@@ -43,3 +42,6 @@ def gradient_clipping(parameters, max_l2_norm: float) -> None:
 
     for p in params:
         p.grad.mul_(clip_coef)
+        
+
+    return total_norm.item()
