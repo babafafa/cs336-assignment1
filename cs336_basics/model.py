@@ -162,6 +162,7 @@ class CausalMultiHeadSelfAttention(nn.Module):
 
     def forward(self, x: torch.Tensor, token_positions: torch.Tensor = None) -> torch.Tensor:
         *batch_dims, S, _ = x.shape
+        assert S <= self.max_seq_len, f"输入序列长度 S({S}) 超过了最大缓存长度 max_seq_len({self.max_seq_len})！"
         h, d_k = self.num_heads, self.d_k
         
         if token_positions is None:
