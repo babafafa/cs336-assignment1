@@ -11,8 +11,7 @@ from jaxtyping import Bool, Float, Int
 from torch import Tensor
 # from cs336_basics.bpe import train_bpe
 from cs336_basics.tokenizer import Tokenizer  
-from cs336_basics.model import Linear, Embedding,Rmsnorm,SwiGLU,RotaryPositionalEmbedding,softmax,scaled_dot_product_attention,CausalMultiHeadSelfAttention,TransformerBlock,TransformerLM,cross_entropy,AdamW,lr_cosine_schedule,gradient_clipping,get_batch,save_checkpoint,load_checkpoint
-from cs336_basics.bpe import TokenizerTrainer
+
 def run_linear(
     d_in: int,
     d_out: int,

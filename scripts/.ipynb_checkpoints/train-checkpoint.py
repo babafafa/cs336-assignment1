@@ -68,13 +68,37 @@ def train():
         
     data = np.load(cfg.data.train_path, mmap_mode='r')
 
-    start_step = 0
-    if cfg.load_ckpt_path and os.path.exists(cfg.load_ckpt_path):
-        start_step = load_checkpoint(cfg.load_ckpt_path, model, optimizer) + 1
-        print(f"从第 {start_step} 步恢复训练！")
+    # start_step = 0
+    # if cfg.load_ckpt_path and os.path.exists(cfg.load_ckpt_path):
+    #     start_step = load_checkpoint(cfg.load_ckpt_path, model, optimizer) + 1
+    #     print(f"从第 {start_step} 步恢复训练！")
 
     model.train()
     start_time = time.time()
+    #     # ==================== 插入 Sanity Check 开始 ====================
+    # print("\n🚀 正在执行 Sanity Check（单批次过拟合测试）...")
+    
+    # # 1. 在循环外面，固定拿一个 Batch
+    # X_fixed, Y_fixed = get_batch(data, cfg.data.batch_size, cfg.model.context_length, device)
+    
+    # # 2. 只跑 200 步
+    # for step in range(200):
+    #     logits = model(X_fixed)
+    #     loss = cross_entropy(logits.reshape(-1, cfg.model.vocab_size), Y_fixed.reshape(-1))
+        
+    #     optimizer.zero_grad()
+    #     loss.backward()
+        
+    #     grad_norm = gradient_clipping(model.parameters(), cfg.optimizer.grad_clip)
+    #     optimizer.step()
+        
+    #     # 每 10 步打印一次 Loss
+    #     if step % 10 == 0:
+    #         print(f"Sanity Step {step:03d} | Loss: {loss.item():.6f} | Grad Norm: {grad_norm:.2f}")
+            
+    # print("🏁 Sanity Check 结束！如果 Loss 没有降到 0.1 以下，请立刻停止并检查代码！")
+    # return # 直接 return 退出训练函数，不跑正式的全量训练了
+    # ==================== 插入 Sanity Check 结束 ====================
     
     for step in range(start_step, cfg.total_steps):
         current_lr = lr_cosine_schedule(

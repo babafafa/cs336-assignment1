@@ -180,9 +180,12 @@ class TokenizerTrainer:
         :param special_tokens: 特殊token列表，例如 ["<|endoftext|>"]
         :param processor_num: 进程数量（train_bpe_pool 中使用）
         """
+
         self.file_path = file_path
-        self.vocab_size = vocab_size if vocab_size else 512
         self.special_tokens = special_tokens if special_tokens else []
+        assert vocab_size is not None and vocab_size >= 256 + len(self.special_tokens), \
+            f"vocab_size={vocab_size} 太小，至少 256 + {len(self.special_tokens)}"
+        self.vocab_size = vocab_size
         self.processor_num = processor_num
         # 数据分块数 = 进程数 * 该倍数。分更多小块可避免整份训练集常驻内存导致 OOM
         self.chunk_multiplier = 10
@@ -200,6 +203,7 @@ class TokenizerTrainer:
         # bp_freq: {(token_id1, token_id2): [count, [pre_token_index, ...]]}
         # 其中 token_id 既可以是字节值，也可以是后续合并产生的新 token ID
         self.bp_freq = {}
+
 
     def train_bpe(self):
         """
@@ -315,18 +319,15 @@ class TokenizerTrainer:
         """将单个子进程的结果合并到主进程的 token_freqs。"""
         for token_bytes, count in worker_result.items():
             self.token_freqs[token_bytes] = self.token_freqs.get(token_bytes, 0) + count
-
     def init_bp_freq(self):
-        """遍历全部 pretoken，统计相邻 byte pair（token pair）的数量及出现位置。"""
         for pre_token_index, (pre_token, pre_count) in self.pre_tokens.items():
             all_bps = list(zip(pre_token[:-1], pre_token[1:]))
             for bp in all_bps:
                 if bp not in self.bp_freq:
-                    self.bp_freq[bp] = [0, []]
+                    self.bp_freq[bp] = [0, set()]          # ← set
                 self.bp_freq[bp][0] += pre_count
-            # 记录每个 pair 出现在哪些 pretoken 中
             for bp in set(all_bps):
-                self.bp_freq[bp][1].append(pre_token_index)
+                self.bp_freq[bp][1].add(pre_token_index)    # ← add
 
     def merge_bpe(self):
         """找到频数最高的 pair 合并，并更新词表与 merges。"""
@@ -342,16 +343,28 @@ class TokenizerTrainer:
         self.merge(pair, new_index)
 
     def merge(self, pair, new_index):
-        """
-        合并 pair 并增量更新 bp_freq。
+        # ① 快照 + 过滤死索引（同时天然去重，因为 [1] 已是 set）
+        #    并顺手做"仍含 pair"检查：不含的直接丢弃
+        alive = []
+        for idx in self.bp_freq[pair][1]:
+            tokens = self.pre_tokens[idx][0]
+            # 快速判断 tokens 里是否还存在相邻的 (pair[0], pair[1])
+            found = False
+            for j in range(len(tokens) - 1):
+                if tokens[j] == pair[0] and tokens[j + 1] == pair[1]:
+                    found = True
+                    break
+            if found:
+                alive.append(idx)
 
-        每次合并只会改变"合并位置附近重叠区域"的 pair 计数：
-          - 消失的 pair：(前一个 token, pair[0]) 和 (pair[1], 后一个 token)
-          - 新增的 pair：(前一个 token, new_token) 和 (new_token, 后一个 token)
-          因此只需遍历涉及该 pair 的 pretoken，无需遍历全部语料。
-        """
-        have_pair_tokens = self.bp_freq[pair][1]
-        for have_pair_token_index in have_pair_tokens:
+        # ② 立即清空：后面若产生 new_pair == pair 的登记，会重新 add 进来；
+        #    而已处理的活索引处理完必不再含 pair，不该留在列表里
+        self.bp_freq[pair][1].clear()
+
+        # ③ 逐个处理活索引（逻辑同原版，只把 append 换成 add）
+        for have_pair_token_index in alive:
+            if pair not in self.bp_freq:      # 计数已归零，剩余活索引不再有贡献
+                break
             bytestr = self.pre_tokens[have_pair_token_index][0]
             new_pre_token = bytestr
             pre_count = self.pre_tokens[have_pair_token_index][1]
@@ -360,49 +373,46 @@ class TokenizerTrainer:
             while i < len(new_pre_token) - 1:
                 slid_window = new_pre_token[i:i + 2]
                 if pair == slid_window:
-                    # 目标 pair 前面还有 token：原 (prev, pair[0]) 消失，新增 (prev, new)
+                    # 左邻居
                     if i > 0:
                         new_pair = (new_pre_token[i - 1], new_index)
                         if new_pair not in self.bp_freq:
-                            self.bp_freq[new_pair] = [pre_count, [have_pair_token_index]]
+                            self.bp_freq[new_pair] = [pre_count, {have_pair_token_index}]
                         else:
                             self.bp_freq[new_pair][0] += pre_count
-                            if not self.bp_freq[new_pair][1] or self.bp_freq[new_pair][1][-1] != have_pair_token_index:
-                                self.bp_freq[new_pair][1].append(have_pair_token_index)
+                            self.bp_freq[new_pair][1].add(have_pair_token_index)
 
                         overlap_pair = (new_pre_token[i - 1], pair[0])
                         self.bp_freq[overlap_pair][0] -= pre_count
                         if self.bp_freq[overlap_pair][0] <= 0:
-                            self.bp_freq.pop(overlap_pair)
+                            self.bp_freq.pop(overlap_pair, None)
 
-                    # 目标 pair 后面还有 token：原 (pair[1], next) 消失，新增 (new, next)
+                    # 右邻居
                     if i + 2 < len(new_pre_token):
                         new_pair = (new_index, new_pre_token[i + 2])
                         if new_pair not in self.bp_freq:
-                            self.bp_freq[new_pair] = [pre_count, [have_pair_token_index]]
+                            self.bp_freq[new_pair] = [pre_count, {have_pair_token_index}]
                         else:
                             self.bp_freq[new_pair][0] += pre_count
-                            if not self.bp_freq[new_pair][1] or self.bp_freq[new_pair][1][-1] != have_pair_token_index:
-                                self.bp_freq[new_pair][1].append(have_pair_token_index)
+                            self.bp_freq[new_pair][1].add(have_pair_token_index)
 
                         overlap_pair = (pair[1], new_pre_token[i + 2])
                         self.bp_freq[overlap_pair][0] -= pre_count
                         if self.bp_freq[overlap_pair][0] <= 0:
-                            self.bp_freq.pop(overlap_pair)
+                            self.bp_freq.pop(overlap_pair, None)
 
-                    # 目标 pair 自身计数减少，归零则移除
+                    # pair 自身计数减少（注意：此时 pair 的 [1] 已 clear，
+                    # 若减到 0 直接 pop 整个 pair 即可）
                     self.bp_freq[pair][0] -= pre_count
                     if self.bp_freq[pair][0] <= 0:
-                        self.bp_freq.pop(pair)
+                        self.bp_freq.pop(pair, None)
 
-                    # 就地合并：替换为新 token ID
+                    # 就地合并
                     new_pre_token = new_pre_token[:i] + (new_index,) + new_pre_token[i + 2:]
 
                 i += 1
 
-            # 更新 pretoken 的字节序列
             self.pre_tokens[have_pair_token_index][0] = new_pre_token
-
 class Tokenizer:
     def __init__(self, vocab: dict[int, bytes], merges: list[tuple[bytes, bytes]], special_tokens: list[str] = None):
         self.vocab = vocab
@@ -436,6 +446,48 @@ class Tokenizer:
             merges = pickle.load(f)
         return cls(vocab, merges, special_tokens)
 
+    def _encode_with_cache(self, text: str, cache: dict) -> list[int]:
+        """
+        与 encode 等价，但共享跨 chunk 的 cache：
+        cache: {pretoken_bytes: tuple(合并后的 token)}
+        只对本块"cache 未命中"的 unique pretoken 调用 merge_pretokens_batch。
+        """
+        ids = []
+        if self.special_pattern:
+            chunks = re.split(self.special_pattern, text)
+        else:
+            chunks = [text]
+
+        pre_tokens = {}          # 只收集 cache 未命中的 unique pretoken
+        pre_tokens_seq = []      # 按出现顺序：bytes（普通）或 str（特殊）
+
+        special_set = set(self.special_tokens) if self.special_tokens else set()
+
+        for chunk in chunks:
+            if not chunk:
+                continue
+            if chunk in special_set:                 # 特殊 token，不参与 merge
+                pre_tokens_seq.append(chunk)
+                continue
+            for m in re.finditer(PAT, chunk):
+                b = m.group().encode('utf-8')
+                pre_tokens_seq.append(b)
+                if b not in cache and b not in pre_tokens:
+                    pre_tokens[b] = [b[i:i+1] for i in range(len(b))]
+
+        # 只 merge 未命中的
+        if pre_tokens:
+            merged = self.merge_pretokens_batch(pre_tokens)
+            cache.update(merged)
+
+        # 按顺序展开
+        for item in pre_tokens_seq:
+            if isinstance(item, str):                # 特殊 token
+                ids.append(self.vocab_to_id[item.encode('utf-8')])
+            else:                                    # 普通 pretoken（必在 cache 里）
+                for tok in cache[item]:
+                    ids.append(self.vocab_to_id[tok])
+        return ids
     # ------------------------------------------------------------------
     # 新增：批量 merge，使用 bp_to_pretoken 反向索引
     # ------------------------------------------------------------------
@@ -527,61 +579,56 @@ class Tokenizer:
     # ------------------------------------------------------------------
     # encode_iterable 保持原样（偏移已修好）
     # ------------------------------------------------------------------
-    def encode_iterable(self, iterable: Iterable[int]):
+    def encode_iterable(self, iterable):
         """
-        根据传入的可迭代文件对象 iterable，分块encode，保证内存高效性。
-        核心逻辑是分块读取时保证不会打碎特殊token或者pretoken。
+        流式编码：跨 chunk 复用 cache，重复 pretoken 全局只 merge 一次。
         """
-        chunk_size = int(1 * 1024 ** 2)
+        chunk_size = 1 * 1024 ** 2
+        cache = {}                       # {pretoken_bytes: tuple}
         file_pos = 0
+
+        max_special_len = len(max(self.special_tokens, key=len)) if self.special_tokens else 0
+
         while True:
             chunk = iterable.read(chunk_size)
-            pos = iterable.tell()
-
             if not chunk:
                 break
 
             is_last_chunk = len(chunk) < chunk_size
             original_chunk = chunk
 
+            # ---- 截断：保证不切断特殊 token / 最后一个 pretoken ----
             if not is_last_chunk:
                 if self.special_tokens:
-                    concat_special_tokens = "|".join(
-                        [re.escape(special_token) for special_token in self.special_tokens]
-                    )
-                    end_chunk = chunk[-2 * len(max(self.special_tokens, key=len)):]
+                    concat_special_tokens = "|".join(re.escape(t) for t in self.special_tokens)
+                    end_chunk = chunk[-2 * max_special_len:]
                     matches = list(re.finditer(concat_special_tokens, end_chunk))
-                    if len(matches) > 0:
+                    if matches:
                         offset = len(chunk) - len(end_chunk)
                         chunk = chunk[:offset + matches[0].span()[0]]
                     else:
-                        chunk = chunk[:-len(max(self.special_tokens, key=len))]
+                        chunk = chunk[:-max_special_len]
                         pretokens = re.findall(PAT, chunk)
                         if pretokens:
-                            endtoken_len = len(pretokens[-1])
-                            chunk = chunk[:-endtoken_len]
+                            chunk = chunk[:-len(pretokens[-1])]
                 else:
                     pretokens = re.findall(PAT, chunk)
                     if pretokens:
-                        endtoken_len = len(pretokens[-1])
-                        chunk = chunk[:-endtoken_len]
+                        chunk = chunk[:-len(pretokens[-1])]
 
                 if not chunk:
-                    chunk = original_chunk
+                    chunk = original_chunk       # 兜底：截没了就退回原块
 
             chunk_len = len(chunk)
             if chunk_len == 0:
                 break
 
-            iterable.seek(file_pos)
-            iterable.read(chunk_len)
-            file_pos = iterable.tell()
+            # 指针推进：直接从 file_pos 推 chunk_len
+            file_pos += len(chunk.encode(iterable.encoding or "utf-8"))
             iterable.seek(file_pos)
 
-            token_ids = self.encode(chunk)
-            for token_id in token_ids:
-                yield token_id
-
+            for tid in self._encode_with_cache(chunk, cache):
+                yield tid
     # ------------------------------------------------------------------
     # decode 保持原样
     # ------------------------------------------------------------------
