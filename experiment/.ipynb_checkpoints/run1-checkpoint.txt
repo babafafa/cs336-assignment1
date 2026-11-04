@@ -1,0 +1,921 @@
+root@I2c208a6d8501e01eeb:~/cs336-assignment1# uv run python scripts/train.py
+成功加载验证集！
+Step 00000 | Loss: 9.2510 | Grad Norm: 1.1701| LR: 0.000000 | Time: 0.4s
+Step 00050 | Loss: 7.9626 | Grad Norm: 2.3807| LR: 0.000050 | Time: 5.3s
+Step 00100 | Loss: 5.7957 | Grad Norm: 1.6805| LR: 0.000100 | Time: 10.2s
+Step 00150 | Loss: 4.5716 | Grad Norm: 0.4791| LR: 0.000150 | Time: 15.2s
+Step 00200 | Loss: 3.8181 | Grad Norm: 0.5202| LR: 0.000200 | Time: 20.1s
+Step 00250 | Loss: 3.4974 | Grad Norm: 0.4843| LR: 0.000250 | Time: 25.0s
+Step 00300 | Loss: 3.2252 | Grad Norm: 0.5918| LR: 0.000300 | Time: 30.0s
+Step 00350 | Loss: 3.1138 | Grad Norm: 0.5339| LR: 0.000350 | Time: 34.9s
+Step 00400 | Loss: 2.9718 | Grad Norm: 0.5921| LR: 0.000400 | Time: 39.9s
+Step 00450 | Loss: 2.8881 | Grad Norm: 0.5678| LR: 0.000450 | Time: 44.8s
+Step 00500 | Loss: 2.8350 | Grad Norm: 0.5738| LR: 0.000500 | Time: 49.8s
+--- [验证] Step 00500 | Val Loss: 2.8204 ---
+Step 00550 | Loss: 2.7429 | Grad Norm: 0.5301| LR: 0.000550 | Time: 55.3s
+Step 00600 | Loss: 2.6594 | Grad Norm: 0.5836| LR: 0.000600 | Time: 60.3s
+Step 00650 | Loss: 2.7472 | Grad Norm: 0.5394| LR: 0.000650 | Time: 65.3s
+Step 00700 | Loss: 2.5896 | Grad Norm: 0.5222| LR: 0.000700 | Time: 70.2s
+Step 00750 | Loss: 2.6222 | Grad Norm: 0.5385| LR: 0.000750 | Time: 75.2s
+Step 00800 | Loss: 2.5592 | Grad Norm: 0.5162| LR: 0.000800 | Time: 80.2s
+Step 00850 | Loss: 2.4891 | Grad Norm: 0.5147| LR: 0.000850 | Time: 85.2s
+Step 00900 | Loss: 2.4075 | Grad Norm: 0.5215| LR: 0.000900 | Time: 90.2s
+Step 00950 | Loss: 2.3361 | Grad Norm: 0.5037| LR: 0.000950 | Time: 95.1s
+Step 01000 | Loss: 2.2891 | Grad Norm: 0.5226| LR: 0.001000 | Time: 100.1s
+--- [验证] Step 01000 | Val Loss: 2.3740 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 01050 | Loss: 2.3235 | Grad Norm: 0.4756| LR: 0.001000 | Time: 106.0s
+Step 01100 | Loss: 2.2282 | Grad Norm: 0.4815| LR: 0.001000 | Time: 111.0s
+Step 01150 | Loss: 2.1847 | Grad Norm: 0.4635| LR: 0.001000 | Time: 116.0s
+Step 01200 | Loss: 2.2213 | Grad Norm: 0.4901| LR: 0.001000 | Time: 120.9s
+Step 01250 | Loss: 2.2524 | Grad Norm: 0.4835| LR: 0.001000 | Time: 125.9s
+Step 01300 | Loss: 2.3051 | Grad Norm: 0.4786| LR: 0.001000 | Time: 130.9s
+Step 01350 | Loss: 2.3857 | Grad Norm: 0.4864| LR: 0.001000 | Time: 135.9s
+Step 01400 | Loss: 2.2377 | Grad Norm: 0.4804| LR: 0.001000 | Time: 140.9s
+Step 01450 | Loss: 2.1781 | Grad Norm: 0.4535| LR: 0.001000 | Time: 145.9s
+Step 01500 | Loss: 2.2939 | Grad Norm: 0.4805| LR: 0.001000 | Time: 150.9s
+--- [验证] Step 01500 | Val Loss: 2.1423 ---
+Step 01550 | Loss: 2.0356 | Grad Norm: 0.4539| LR: 0.001000 | Time: 156.4s
+Step 01600 | Loss: 2.0508 | Grad Norm: 0.4571| LR: 0.000999 | Time: 161.4s
+Step 01650 | Loss: 2.1113 | Grad Norm: 0.4606| LR: 0.000999 | Time: 166.4s
+Step 01700 | Loss: 2.0304 | Grad Norm: 0.4364| LR: 0.000999 | Time: 171.4s
+Step 01750 | Loss: 1.9919 | Grad Norm: 0.4673| LR: 0.000999 | Time: 176.4s
+Step 01800 | Loss: 1.9907 | Grad Norm: 0.4473| LR: 0.000999 | Time: 181.4s
+Step 01850 | Loss: 2.0691 | Grad Norm: 0.4490| LR: 0.000999 | Time: 186.4s
+Step 01900 | Loss: 2.0568 | Grad Norm: 0.4845| LR: 0.000999 | Time: 191.3s
+Step 01950 | Loss: 2.0803 | Grad Norm: 0.4460| LR: 0.000999 | Time: 196.3s
+Step 02000 | Loss: 2.0961 | Grad Norm: 0.4538| LR: 0.000999 | Time: 201.3s
+--- [验证] Step 02000 | Val Loss: 2.0285 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 02050 | Loss: 2.0499 | Grad Norm: 0.4335| LR: 0.000998 | Time: 207.3s
+Step 02100 | Loss: 2.1072 | Grad Norm: 0.4453| LR: 0.000998 | Time: 212.3s
+Step 02150 | Loss: 1.9826 | Grad Norm: 0.4454| LR: 0.000998 | Time: 217.3s
+Step 02200 | Loss: 1.8990 | Grad Norm: 0.4423| LR: 0.000998 | Time: 222.3s
+Step 02250 | Loss: 1.9710 | Grad Norm: 0.4207| LR: 0.000998 | Time: 227.3s
+Step 02300 | Loss: 1.7630 | Grad Norm: 0.4145| LR: 0.000998 | Time: 232.3s
+Step 02350 | Loss: 2.0007 | Grad Norm: 0.4335| LR: 0.000997 | Time: 237.3s
+Step 02400 | Loss: 1.9408 | Grad Norm: 0.4287| LR: 0.000997 | Time: 242.3s
+Step 02450 | Loss: 1.9982 | Grad Norm: 0.4255| LR: 0.000997 | Time: 247.3s
+Step 02500 | Loss: 1.9319 | Grad Norm: 0.4184| LR: 0.000997 | Time: 252.2s
+--- [验证] Step 02500 | Val Loss: 1.9524 ---
+Step 02550 | Loss: 1.9269 | Grad Norm: 0.4375| LR: 0.000996 | Time: 257.8s
+Step 02600 | Loss: 1.9628 | Grad Norm: 0.4343| LR: 0.000996 | Time: 262.8s
+Step 02650 | Loss: 2.0378 | Grad Norm: 0.4286| LR: 0.000996 | Time: 267.8s
+Step 02700 | Loss: 1.9270 | Grad Norm: 0.4205| LR: 0.000996 | Time: 272.8s
+Step 02750 | Loss: 1.9309 | Grad Norm: 0.4272| LR: 0.000996 | Time: 277.8s
+Step 02800 | Loss: 1.9232 | Grad Norm: 0.4092| LR: 0.000995 | Time: 282.8s
+Step 02850 | Loss: 1.9074 | Grad Norm: 0.4164| LR: 0.000995 | Time: 287.8s
+Step 02900 | Loss: 1.8337 | Grad Norm: 0.3978| LR: 0.000995 | Time: 292.8s
+Step 02950 | Loss: 1.8291 | Grad Norm: 0.3992| LR: 0.000994 | Time: 297.8s
+Step 03000 | Loss: 1.7624 | Grad Norm: 0.4224| LR: 0.000994 | Time: 302.8s
+--- [验证] Step 03000 | Val Loss: 1.8995 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 03050 | Loss: 1.9803 | Grad Norm: 0.4316| LR: 0.000994 | Time: 308.8s
+Step 03100 | Loss: 1.8227 | Grad Norm: 0.4200| LR: 0.000994 | Time: 313.8s
+Step 03150 | Loss: 1.7961 | Grad Norm: 0.4207| LR: 0.000993 | Time: 318.8s
+Step 03200 | Loss: 1.9462 | Grad Norm: 0.4072| LR: 0.000993 | Time: 323.8s
+Step 03250 | Loss: 1.8389 | Grad Norm: 0.4045| LR: 0.000993 | Time: 328.8s
+Step 03300 | Loss: 1.8288 | Grad Norm: 0.4101| LR: 0.000992 | Time: 333.8s
+Step 03350 | Loss: 1.9269 | Grad Norm: 0.4422| LR: 0.000992 | Time: 338.7s
+Step 03400 | Loss: 1.9747 | Grad Norm: 0.4293| LR: 0.000992 | Time: 343.7s
+Step 03450 | Loss: 1.8415 | Grad Norm: 0.4184| LR: 0.000991 | Time: 348.7s
+Step 03500 | Loss: 1.8597 | Grad Norm: 0.4261| LR: 0.000991 | Time: 353.7s
+--- [验证] Step 03500 | Val Loss: 1.8582 ---
+Step 03550 | Loss: 1.7604 | Grad Norm: 0.3920| LR: 0.000991 | Time: 359.3s
+Step 03600 | Loss: 1.8802 | Grad Norm: 0.4440| LR: 0.000990 | Time: 364.3s
+Step 03650 | Loss: 1.7764 | Grad Norm: 0.4172| LR: 0.000990 | Time: 369.3s
+Step 03700 | Loss: 1.7833 | Grad Norm: 0.4162| LR: 0.000989 | Time: 374.2s
+Step 03750 | Loss: 1.8057 | Grad Norm: 0.4075| LR: 0.000989 | Time: 379.2s
+Step 03800 | Loss: 1.8534 | Grad Norm: 0.4128| LR: 0.000989 | Time: 384.2s
+Step 03850 | Loss: 1.8456 | Grad Norm: 0.4103| LR: 0.000988 | Time: 389.2s
+Step 03900 | Loss: 1.8079 | Grad Norm: 0.4043| LR: 0.000988 | Time: 394.2s
+Step 03950 | Loss: 1.8532 | Grad Norm: 0.4061| LR: 0.000987 | Time: 399.2s
+Step 04000 | Loss: 1.8988 | Grad Norm: 0.4086| LR: 0.000987 | Time: 404.2s
+--- [验证] Step 04000 | Val Loss: 1.8274 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 04050 | Loss: 1.8243 | Grad Norm: 0.3992| LR: 0.000986 | Time: 410.2s
+Step 04100 | Loss: 1.8433 | Grad Norm: 0.4124| LR: 0.000986 | Time: 415.1s
+Step 04150 | Loss: 1.7644 | Grad Norm: 0.4196| LR: 0.000986 | Time: 420.1s
+Step 04200 | Loss: 1.7924 | Grad Norm: 0.3962| LR: 0.000985 | Time: 425.1s
+Step 04250 | Loss: 1.6928 | Grad Norm: 0.4229| LR: 0.000985 | Time: 430.1s
+Step 04300 | Loss: 1.7874 | Grad Norm: 0.4023| LR: 0.000984 | Time: 435.1s
+Step 04350 | Loss: 1.7278 | Grad Norm: 0.3959| LR: 0.000984 | Time: 440.0s
+Step 04400 | Loss: 1.7858 | Grad Norm: 0.3949| LR: 0.000983 | Time: 445.0s
+Step 04450 | Loss: 1.7758 | Grad Norm: 0.3966| LR: 0.000983 | Time: 450.0s
+Step 04500 | Loss: 1.7813 | Grad Norm: 0.4041| LR: 0.000982 | Time: 455.0s
+--- [验证] Step 04500 | Val Loss: 1.8027 ---
+Step 04550 | Loss: 1.8263 | Grad Norm: 0.3962| LR: 0.000982 | Time: 460.6s
+Step 04600 | Loss: 1.7515 | Grad Norm: 0.4214| LR: 0.000981 | Time: 465.6s
+Step 04650 | Loss: 1.8354 | Grad Norm: 0.4015| LR: 0.000981 | Time: 470.6s
+Step 04700 | Loss: 1.7617 | Grad Norm: 0.4163| LR: 0.000980 | Time: 475.6s
+Step 04750 | Loss: 1.8394 | Grad Norm: 0.4253| LR: 0.000980 | Time: 480.6s
+Step 04800 | Loss: 1.7123 | Grad Norm: 0.3957| LR: 0.000979 | Time: 485.6s
+Step 04850 | Loss: 1.7222 | Grad Norm: 0.3912| LR: 0.000979 | Time: 490.6s
+Step 04900 | Loss: 1.6763 | Grad Norm: 0.4126| LR: 0.000978 | Time: 495.6s
+Step 04950 | Loss: 1.7772 | Grad Norm: 0.4013| LR: 0.000977 | Time: 500.5s
+Step 05000 | Loss: 1.7675 | Grad Norm: 0.3896| LR: 0.000977 | Time: 505.5s
+--- [验证] Step 05000 | Val Loss: 1.7822 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 05050 | Loss: 1.6854 | Grad Norm: 0.4009| LR: 0.000976 | Time: 511.5s
+Step 05100 | Loss: 1.7202 | Grad Norm: 0.4179| LR: 0.000976 | Time: 516.5s
+Step 05150 | Loss: 1.7870 | Grad Norm: 0.3868| LR: 0.000975 | Time: 521.5s
+Step 05200 | Loss: 1.7507 | Grad Norm: 0.3983| LR: 0.000974 | Time: 526.5s
+Step 05250 | Loss: 1.6092 | Grad Norm: 0.3740| LR: 0.000974 | Time: 531.5s
+Step 05300 | Loss: 1.8822 | Grad Norm: 0.3969| LR: 0.000973 | Time: 536.5s
+Step 05350 | Loss: 1.7679 | Grad Norm: 0.4098| LR: 0.000973 | Time: 541.5s
+Step 05400 | Loss: 1.7373 | Grad Norm: 0.4059| LR: 0.000972 | Time: 546.5s
+Step 05450 | Loss: 1.7726 | Grad Norm: 0.3917| LR: 0.000971 | Time: 551.5s
+Step 05500 | Loss: 1.7283 | Grad Norm: 0.3972| LR: 0.000971 | Time: 556.4s
+--- [验证] Step 05500 | Val Loss: 1.7636 ---
+Step 05550 | Loss: 1.6883 | Grad Norm: 0.4091| LR: 0.000970 | Time: 562.0s
+Step 05600 | Loss: 1.7213 | Grad Norm: 0.3898| LR: 0.000969 | Time: 567.0s
+Step 05650 | Loss: 1.8194 | Grad Norm: 0.4190| LR: 0.000969 | Time: 572.0s
+Step 05700 | Loss: 1.7165 | Grad Norm: 0.4045| LR: 0.000968 | Time: 577.0s
+Step 05750 | Loss: 1.6235 | Grad Norm: 0.3854| LR: 0.000967 | Time: 582.0s
+Step 05800 | Loss: 1.6937 | Grad Norm: 0.3944| LR: 0.000967 | Time: 587.0s
+Step 05850 | Loss: 1.7066 | Grad Norm: 0.4000| LR: 0.000966 | Time: 592.0s
+Step 05900 | Loss: 1.7966 | Grad Norm: 0.3965| LR: 0.000965 | Time: 597.0s
+Step 05950 | Loss: 1.6269 | Grad Norm: 0.4011| LR: 0.000965 | Time: 601.9s
+Step 06000 | Loss: 1.7518 | Grad Norm: 0.4048| LR: 0.000964 | Time: 606.9s
+--- [验证] Step 06000 | Val Loss: 1.7445 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 06050 | Loss: 1.6372 | Grad Norm: 0.3775| LR: 0.000963 | Time: 612.9s
+Step 06100 | Loss: 1.7478 | Grad Norm: 0.3970| LR: 0.000963 | Time: 617.9s
+Step 06150 | Loss: 1.6546 | Grad Norm: 0.3733| LR: 0.000962 | Time: 622.9s
+Step 06200 | Loss: 1.7399 | Grad Norm: 0.4192| LR: 0.000961 | Time: 627.9s
+Step 06250 | Loss: 1.7404 | Grad Norm: 0.3974| LR: 0.000960 | Time: 632.9s
+Step 06300 | Loss: 1.8272 | Grad Norm: 0.3933| LR: 0.000960 | Time: 637.9s
+Step 06350 | Loss: 1.6321 | Grad Norm: 0.3891| LR: 0.000959 | Time: 642.8s
+Step 06400 | Loss: 1.6120 | Grad Norm: 0.3964| LR: 0.000958 | Time: 647.8s
+Step 06450 | Loss: 1.6669 | Grad Norm: 0.3834| LR: 0.000957 | Time: 652.8s
+Step 06500 | Loss: 1.8186 | Grad Norm: 0.4113| LR: 0.000957 | Time: 657.8s
+--- [验证] Step 06500 | Val Loss: 1.7284 ---
+Step 06550 | Loss: 1.7937 | Grad Norm: 0.4060| LR: 0.000956 | Time: 663.4s
+Step 06600 | Loss: 1.7732 | Grad Norm: 0.3973| LR: 0.000955 | Time: 668.4s
+Step 06650 | Loss: 1.8633 | Grad Norm: 0.3924| LR: 0.000954 | Time: 673.4s
+Step 06700 | Loss: 1.5804 | Grad Norm: 0.4003| LR: 0.000953 | Time: 678.4s
+Step 06750 | Loss: 1.7306 | Grad Norm: 0.4018| LR: 0.000953 | Time: 683.4s
+Step 06800 | Loss: 1.6017 | Grad Norm: 0.4009| LR: 0.000952 | Time: 688.4s
+Step 06850 | Loss: 1.6365 | Grad Norm: 0.3827| LR: 0.000951 | Time: 693.3s
+Step 06900 | Loss: 1.6935 | Grad Norm: 0.3969| LR: 0.000950 | Time: 698.3s
+Step 06950 | Loss: 1.6112 | Grad Norm: 0.3922| LR: 0.000949 | Time: 703.3s
+Step 07000 | Loss: 1.7250 | Grad Norm: 0.4049| LR: 0.000948 | Time: 708.3s
+--- [验证] Step 07000 | Val Loss: 1.7171 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 07050 | Loss: 1.6418 | Grad Norm: 0.3931| LR: 0.000948 | Time: 714.3s
+Step 07100 | Loss: 1.5917 | Grad Norm: 0.3795| LR: 0.000947 | Time: 719.3s
+Step 07150 | Loss: 1.8887 | Grad Norm: 0.4115| LR: 0.000946 | Time: 724.3s
+Step 07200 | Loss: 1.7153 | Grad Norm: 0.4106| LR: 0.000945 | Time: 729.3s
+Step 07250 | Loss: 1.8083 | Grad Norm: 0.3945| LR: 0.000944 | Time: 734.3s
+Step 07300 | Loss: 1.7055 | Grad Norm: 0.3970| LR: 0.000943 | Time: 739.3s
+Step 07350 | Loss: 1.7214 | Grad Norm: 0.3900| LR: 0.000942 | Time: 744.3s
+Step 07400 | Loss: 1.7530 | Grad Norm: 0.3932| LR: 0.000942 | Time: 749.3s
+Step 07450 | Loss: 1.6996 | Grad Norm: 0.4027| LR: 0.000941 | Time: 754.3s
+Step 07500 | Loss: 1.6577 | Grad Norm: 0.3996| LR: 0.000940 | Time: 759.3s
+--- [验证] Step 07500 | Val Loss: 1.7026 ---
+Step 07550 | Loss: 1.7406 | Grad Norm: 0.4038| LR: 0.000939 | Time: 764.9s
+Step 07600 | Loss: 1.7972 | Grad Norm: 0.3994| LR: 0.000938 | Time: 769.9s
+Step 07650 | Loss: 1.7661 | Grad Norm: 0.4175| LR: 0.000937 | Time: 774.9s
+Step 07700 | Loss: 1.6741 | Grad Norm: 0.4170| LR: 0.000936 | Time: 779.9s
+Step 07750 | Loss: 1.6083 | Grad Norm: 0.3764| LR: 0.000935 | Time: 784.9s
+Step 07800 | Loss: 1.7923 | Grad Norm: 0.4129| LR: 0.000934 | Time: 789.8s
+Step 07850 | Loss: 1.6871 | Grad Norm: 0.3997| LR: 0.000933 | Time: 794.8s
+Step 07900 | Loss: 1.6956 | Grad Norm: 0.3946| LR: 0.000932 | Time: 799.8s
+Step 07950 | Loss: 1.6045 | Grad Norm: 0.3838| LR: 0.000931 | Time: 804.8s
+Step 08000 | Loss: 1.7126 | Grad Norm: 0.4067| LR: 0.000930 | Time: 809.8s
+--- [验证] Step 08000 | Val Loss: 1.6941 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 08050 | Loss: 1.7188 | Grad Norm: 0.4097| LR: 0.000929 | Time: 815.8s
+Step 08100 | Loss: 1.7191 | Grad Norm: 0.4201| LR: 0.000928 | Time: 820.8s
+Step 08150 | Loss: 1.7293 | Grad Norm: 0.4351| LR: 0.000927 | Time: 825.8s
+Step 08200 | Loss: 1.6194 | Grad Norm: 0.3814| LR: 0.000926 | Time: 830.8s
+Step 08250 | Loss: 1.6999 | Grad Norm: 0.3850| LR: 0.000925 | Time: 835.8s
+Step 08300 | Loss: 1.7032 | Grad Norm: 0.4012| LR: 0.000924 | Time: 840.8s
+Step 08350 | Loss: 1.6698 | Grad Norm: 0.4046| LR: 0.000923 | Time: 845.8s
+Step 08400 | Loss: 1.6269 | Grad Norm: 0.3772| LR: 0.000922 | Time: 850.8s
+Step 08450 | Loss: 1.7022 | Grad Norm: 0.3976| LR: 0.000921 | Time: 855.7s
+Step 08500 | Loss: 1.6422 | Grad Norm: 0.3903| LR: 0.000920 | Time: 860.7s
+--- [验证] Step 08500 | Val Loss: 1.6829 ---
+Step 08550 | Loss: 1.6892 | Grad Norm: 0.3969| LR: 0.000919 | Time: 866.3s
+Step 08600 | Loss: 1.6429 | Grad Norm: 0.3978| LR: 0.000918 | Time: 871.3s
+Step 08650 | Loss: 1.5925 | Grad Norm: 0.3914| LR: 0.000917 | Time: 876.3s
+Step 08700 | Loss: 1.6539 | Grad Norm: 0.3919| LR: 0.000916 | Time: 881.3s
+Step 08750 | Loss: 1.5884 | Grad Norm: 0.3845| LR: 0.000915 | Time: 886.3s
+Step 08800 | Loss: 1.6438 | Grad Norm: 0.4001| LR: 0.000914 | Time: 891.3s
+Step 08850 | Loss: 1.6916 | Grad Norm: 0.4065| LR: 0.000913 | Time: 896.2s
+Step 08900 | Loss: 1.7018 | Grad Norm: 0.4078| LR: 0.000912 | Time: 901.2s
+Step 08950 | Loss: 1.6857 | Grad Norm: 0.4026| LR: 0.000911 | Time: 906.2s
+Step 09000 | Loss: 1.6911 | Grad Norm: 0.4103| LR: 0.000910 | Time: 911.2s
+--- [验证] Step 09000 | Val Loss: 1.6723 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 09050 | Loss: 1.7622 | Grad Norm: 0.4223| LR: 0.000909 | Time: 917.2s
+Step 09100 | Loss: 1.6756 | Grad Norm: 0.4037| LR: 0.000908 | Time: 922.2s
+Step 09150 | Loss: 1.6498 | Grad Norm: 0.4003| LR: 0.000906 | Time: 927.2s
+Step 09200 | Loss: 1.6829 | Grad Norm: 0.3900| LR: 0.000905 | Time: 932.2s
+Step 09250 | Loss: 1.6829 | Grad Norm: 0.3914| LR: 0.000904 | Time: 937.1s
+Step 09300 | Loss: 1.8207 | Grad Norm: 0.4223| LR: 0.000903 | Time: 942.1s
+Step 09350 | Loss: 1.7771 | Grad Norm: 0.4175| LR: 0.000902 | Time: 947.0s
+Step 09400 | Loss: 1.6933 | Grad Norm: 0.3987| LR: 0.000901 | Time: 952.0s
+Step 09450 | Loss: 1.6349 | Grad Norm: 0.4006| LR: 0.000900 | Time: 956.9s
+Step 09500 | Loss: 1.6394 | Grad Norm: 0.3974| LR: 0.000899 | Time: 961.9s
+--- [验证] Step 09500 | Val Loss: 1.6657 ---
+Step 09550 | Loss: 1.6365 | Grad Norm: 0.4152| LR: 0.000897 | Time: 967.4s
+Step 09600 | Loss: 1.7099 | Grad Norm: 0.4089| LR: 0.000896 | Time: 972.4s
+Step 09650 | Loss: 1.7014 | Grad Norm: 0.4039| LR: 0.000895 | Time: 977.4s
+Step 09700 | Loss: 1.6372 | Grad Norm: 0.3941| LR: 0.000894 | Time: 982.3s
+Step 09750 | Loss: 1.6146 | Grad Norm: 0.3993| LR: 0.000893 | Time: 987.3s
+Step 09800 | Loss: 1.6783 | Grad Norm: 0.4357| LR: 0.000892 | Time: 992.2s
+Step 09850 | Loss: 1.7496 | Grad Norm: 0.4372| LR: 0.000890 | Time: 997.2s
+Step 09900 | Loss: 1.6605 | Grad Norm: 0.4147| LR: 0.000889 | Time: 1002.1s
+Step 09950 | Loss: 1.6760 | Grad Norm: 0.4014| LR: 0.000888 | Time: 1007.1s
+Step 10000 | Loss: 1.5295 | Grad Norm: 0.3872| LR: 0.000887 | Time: 1012.0s
+--- [验证] Step 10000 | Val Loss: 1.6535 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 10050 | Loss: 1.6727 | Grad Norm: 0.4041| LR: 0.000886 | Time: 1017.9s
+Step 10100 | Loss: 1.6013 | Grad Norm: 0.4098| LR: 0.000884 | Time: 1022.9s
+Step 10150 | Loss: 1.6454 | Grad Norm: 0.3931| LR: 0.000883 | Time: 1027.8s
+Step 10200 | Loss: 1.6199 | Grad Norm: 0.4092| LR: 0.000882 | Time: 1032.8s
+Step 10250 | Loss: 1.6127 | Grad Norm: 0.4007| LR: 0.000881 | Time: 1037.8s
+Step 10300 | Loss: 1.5726 | Grad Norm: 0.3844| LR: 0.000880 | Time: 1042.7s
+Step 10350 | Loss: 1.6831 | Grad Norm: 0.4359| LR: 0.000878 | Time: 1047.7s
+Step 10400 | Loss: 1.6296 | Grad Norm: 0.3976| LR: 0.000877 | Time: 1052.7s
+Step 10450 | Loss: 1.7425 | Grad Norm: 0.4488| LR: 0.000876 | Time: 1057.6s
+Step 10500 | Loss: 1.6359 | Grad Norm: 0.4032| LR: 0.000875 | Time: 1062.6s
+--- [验证] Step 10500 | Val Loss: 1.6487 ---
+Step 10550 | Loss: 1.4298 | Grad Norm: 0.3823| LR: 0.000873 | Time: 1068.1s
+Step 10600 | Loss: 1.6557 | Grad Norm: 0.3984| LR: 0.000872 | Time: 1073.1s
+Step 10650 | Loss: 1.5085 | Grad Norm: 0.3996| LR: 0.000871 | Time: 1078.1s
+Step 10700 | Loss: 1.5004 | Grad Norm: 0.3897| LR: 0.000869 | Time: 1083.0s
+Step 10750 | Loss: 1.6237 | Grad Norm: 0.3943| LR: 0.000868 | Time: 1088.0s
+Step 10800 | Loss: 1.6471 | Grad Norm: 0.4313| LR: 0.000867 | Time: 1093.0s
+Step 10850 | Loss: 1.5859 | Grad Norm: 0.3909| LR: 0.000866 | Time: 1098.0s
+Step 10900 | Loss: 1.6777 | Grad Norm: 0.4127| LR: 0.000864 | Time: 1103.0s
+Step 10950 | Loss: 1.6278 | Grad Norm: 0.4117| LR: 0.000863 | Time: 1108.0s
+Step 11000 | Loss: 1.6465 | Grad Norm: 0.4042| LR: 0.000862 | Time: 1113.0s
+--- [验证] Step 11000 | Val Loss: 1.6413 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 11050 | Loss: 1.6099 | Grad Norm: 0.4136| LR: 0.000860 | Time: 1119.0s
+Step 11100 | Loss: 1.6318 | Grad Norm: 0.4009| LR: 0.000859 | Time: 1123.9s
+Step 11150 | Loss: 1.6555 | Grad Norm: 0.4197| LR: 0.000858 | Time: 1128.9s
+Step 11200 | Loss: 1.5722 | Grad Norm: 0.3872| LR: 0.000856 | Time: 1133.9s
+Step 11250 | Loss: 1.6902 | Grad Norm: 0.4089| LR: 0.000855 | Time: 1138.9s
+Step 11300 | Loss: 1.7400 | Grad Norm: 0.4052| LR: 0.000854 | Time: 1143.9s
+Step 11350 | Loss: 1.5333 | Grad Norm: 0.3938| LR: 0.000852 | Time: 1148.9s
+Step 11400 | Loss: 1.6818 | Grad Norm: 0.4061| LR: 0.000851 | Time: 1153.9s
+Step 11450 | Loss: 1.7472 | Grad Norm: 0.4215| LR: 0.000850 | Time: 1158.9s
+Step 11500 | Loss: 1.5808 | Grad Norm: 0.4035| LR: 0.000848 | Time: 1163.8s
+--- [验证] Step 11500 | Val Loss: 1.6335 ---
+Step 11550 | Loss: 1.7218 | Grad Norm: 0.4214| LR: 0.000847 | Time: 1169.4s
+Step 11600 | Loss: 1.6327 | Grad Norm: 0.4064| LR: 0.000846 | Time: 1174.4s
+Step 11650 | Loss: 1.6762 | Grad Norm: 0.4040| LR: 0.000844 | Time: 1179.4s
+Step 11700 | Loss: 1.6064 | Grad Norm: 0.3998| LR: 0.000843 | Time: 1184.4s
+Step 11750 | Loss: 1.5837 | Grad Norm: 0.4134| LR: 0.000842 | Time: 1189.4s
+Step 11800 | Loss: 1.6867 | Grad Norm: 0.4224| LR: 0.000840 | Time: 1194.4s
+Step 11850 | Loss: 1.5459 | Grad Norm: 0.4157| LR: 0.000839 | Time: 1199.4s
+Step 11900 | Loss: 1.6288 | Grad Norm: 0.4176| LR: 0.000837 | Time: 1204.4s
+Step 11950 | Loss: 1.5537 | Grad Norm: 0.4137| LR: 0.000836 | Time: 1209.3s
+Step 12000 | Loss: 1.5831 | Grad Norm: 0.4061| LR: 0.000835 | Time: 1214.3s
+--- [验证] Step 12000 | Val Loss: 1.6304 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 12050 | Loss: 1.6127 | Grad Norm: 0.4014| LR: 0.000833 | Time: 1220.3s
+Step 12100 | Loss: 1.5948 | Grad Norm: 0.4167| LR: 0.000832 | Time: 1225.3s
+Step 12150 | Loss: 1.5806 | Grad Norm: 0.4251| LR: 0.000830 | Time: 1230.3s
+Step 12200 | Loss: 1.5604 | Grad Norm: 0.3892| LR: 0.000829 | Time: 1235.3s
+Step 12250 | Loss: 1.5896 | Grad Norm: 0.4037| LR: 0.000828 | Time: 1240.3s
+Step 12300 | Loss: 1.7346 | Grad Norm: 0.4138| LR: 0.000826 | Time: 1245.3s
+Step 12350 | Loss: 1.5923 | Grad Norm: 0.4021| LR: 0.000825 | Time: 1250.3s
+Step 12400 | Loss: 1.6057 | Grad Norm: 0.4231| LR: 0.000823 | Time: 1255.3s
+Step 12450 | Loss: 1.5931 | Grad Norm: 0.4179| LR: 0.000822 | Time: 1260.3s
+Step 12500 | Loss: 1.5356 | Grad Norm: 0.4262| LR: 0.000820 | Time: 1265.3s
+--- [验证] Step 12500 | Val Loss: 1.6216 ---
+Step 12550 | Loss: 1.5950 | Grad Norm: 0.4448| LR: 0.000819 | Time: 1270.8s
+Step 12600 | Loss: 1.5540 | Grad Norm: 0.4046| LR: 0.000817 | Time: 1275.8s
+Step 12650 | Loss: 1.6470 | Grad Norm: 0.4219| LR: 0.000816 | Time: 1280.8s
+Step 12700 | Loss: 1.6585 | Grad Norm: 0.4091| LR: 0.000815 | Time: 1285.8s
+Step 12750 | Loss: 1.6791 | Grad Norm: 0.4339| LR: 0.000813 | Time: 1290.8s
+Step 12800 | Loss: 1.6505 | Grad Norm: 0.4324| LR: 0.000812 | Time: 1295.8s
+Step 12850 | Loss: 1.6433 | Grad Norm: 0.4250| LR: 0.000810 | Time: 1300.8s
+Step 12900 | Loss: 1.5779 | Grad Norm: 0.4037| LR: 0.000809 | Time: 1305.8s
+Step 12950 | Loss: 1.6409 | Grad Norm: 0.4269| LR: 0.000807 | Time: 1310.8s
+Step 13000 | Loss: 1.6011 | Grad Norm: 0.4306| LR: 0.000806 | Time: 1315.8s
+--- [验证] Step 13000 | Val Loss: 1.6193 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 13050 | Loss: 1.6297 | Grad Norm: 0.4019| LR: 0.000804 | Time: 1321.8s
+Step 13100 | Loss: 1.5779 | Grad Norm: 0.4307| LR: 0.000803 | Time: 1326.8s
+Step 13150 | Loss: 1.7443 | Grad Norm: 0.4340| LR: 0.000801 | Time: 1331.7s
+Step 13200 | Loss: 1.5745 | Grad Norm: 0.4161| LR: 0.000800 | Time: 1336.7s
+Step 13250 | Loss: 1.6495 | Grad Norm: 0.4163| LR: 0.000798 | Time: 1341.7s
+Step 13300 | Loss: 1.5265 | Grad Norm: 0.4130| LR: 0.000797 | Time: 1346.7s
+Step 13350 | Loss: 1.5454 | Grad Norm: 0.3985| LR: 0.000795 | Time: 1351.7s
+Step 13400 | Loss: 1.6039 | Grad Norm: 0.4307| LR: 0.000794 | Time: 1356.7s
+Step 13450 | Loss: 1.5341 | Grad Norm: 0.4256| LR: 0.000792 | Time: 1361.7s
+Step 13500 | Loss: 1.5876 | Grad Norm: 0.4192| LR: 0.000791 | Time: 1366.7s
+--- [验证] Step 13500 | Val Loss: 1.6075 ---
+Step 13550 | Loss: 1.6276 | Grad Norm: 0.4296| LR: 0.000789 | Time: 1372.3s
+Step 13600 | Loss: 1.7154 | Grad Norm: 0.4254| LR: 0.000787 | Time: 1377.3s
+Step 13650 | Loss: 1.7317 | Grad Norm: 0.4366| LR: 0.000786 | Time: 1382.3s
+Step 13700 | Loss: 1.5789 | Grad Norm: 0.4470| LR: 0.000784 | Time: 1387.3s
+Step 13750 | Loss: 1.6814 | Grad Norm: 0.4188| LR: 0.000783 | Time: 1392.3s
+Step 13800 | Loss: 1.4539 | Grad Norm: 0.3990| LR: 0.000781 | Time: 1397.3s
+Step 13850 | Loss: 1.5344 | Grad Norm: 0.4169| LR: 0.000780 | Time: 1402.3s
+Step 13900 | Loss: 1.6151 | Grad Norm: 0.4126| LR: 0.000778 | Time: 1407.2s
+Step 13950 | Loss: 1.4954 | Grad Norm: 0.4019| LR: 0.000777 | Time: 1412.2s
+Step 14000 | Loss: 1.5989 | Grad Norm: 0.4364| LR: 0.000775 | Time: 1417.2s
+--- [验证] Step 14000 | Val Loss: 1.6022 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 14050 | Loss: 1.5339 | Grad Norm: 0.3932| LR: 0.000773 | Time: 1423.2s
+Step 14100 | Loss: 1.4930 | Grad Norm: 0.4139| LR: 0.000772 | Time: 1428.2s
+Step 14150 | Loss: 1.5625 | Grad Norm: 0.4262| LR: 0.000770 | Time: 1433.2s
+Step 14200 | Loss: 1.5507 | Grad Norm: 0.4152| LR: 0.000769 | Time: 1438.2s
+Step 14250 | Loss: 1.5280 | Grad Norm: 0.4217| LR: 0.000767 | Time: 1443.2s
+Step 14300 | Loss: 1.5418 | Grad Norm: 0.4298| LR: 0.000766 | Time: 1448.2s
+Step 14350 | Loss: 1.5050 | Grad Norm: 0.4088| LR: 0.000764 | Time: 1453.1s
+Step 14400 | Loss: 1.6392 | Grad Norm: 0.4134| LR: 0.000762 | Time: 1458.1s
+Step 14450 | Loss: 1.6994 | Grad Norm: 0.4536| LR: 0.000761 | Time: 1463.1s
+Step 14500 | Loss: 1.5844 | Grad Norm: 0.4200| LR: 0.000759 | Time: 1468.1s
+--- [验证] Step 14500 | Val Loss: 1.5972 ---
+Step 14550 | Loss: 1.5979 | Grad Norm: 0.4620| LR: 0.000758 | Time: 1473.7s
+Step 14600 | Loss: 1.6710 | Grad Norm: 0.4341| LR: 0.000756 | Time: 1478.7s
+Step 14650 | Loss: 1.5618 | Grad Norm: 0.4295| LR: 0.000754 | Time: 1483.7s
+Step 14700 | Loss: 1.6462 | Grad Norm: 0.4292| LR: 0.000753 | Time: 1488.7s
+Step 14750 | Loss: 1.6825 | Grad Norm: 0.4485| LR: 0.000751 | Time: 1493.7s
+Step 14800 | Loss: 1.5714 | Grad Norm: 0.4180| LR: 0.000749 | Time: 1498.7s
+Step 14850 | Loss: 1.5961 | Grad Norm: 0.4283| LR: 0.000748 | Time: 1503.7s
+Step 14900 | Loss: 1.5449 | Grad Norm: 0.4262| LR: 0.000746 | Time: 1508.7s
+Step 14950 | Loss: 1.6316 | Grad Norm: 0.4573| LR: 0.000745 | Time: 1513.6s
+Step 15000 | Loss: 1.4808 | Grad Norm: 0.4154| LR: 0.000743 | Time: 1518.6s
+--- [验证] Step 15000 | Val Loss: 1.5908 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 15050 | Loss: 1.6916 | Grad Norm: 0.4518| LR: 0.000741 | Time: 1524.7s
+Step 15100 | Loss: 1.5683 | Grad Norm: 0.4273| LR: 0.000740 | Time: 1529.7s
+Step 15150 | Loss: 1.6112 | Grad Norm: 0.4271| LR: 0.000738 | Time: 1534.7s
+Step 15200 | Loss: 1.5723 | Grad Norm: 0.4306| LR: 0.000736 | Time: 1539.6s
+Step 15250 | Loss: 1.5970 | Grad Norm: 0.4523| LR: 0.000735 | Time: 1544.6s
+Step 15300 | Loss: 1.7198 | Grad Norm: 0.4324| LR: 0.000733 | Time: 1549.6s
+Step 15350 | Loss: 1.6547 | Grad Norm: 0.4450| LR: 0.000731 | Time: 1554.6s
+Step 15400 | Loss: 1.6316 | Grad Norm: 0.4242| LR: 0.000730 | Time: 1559.6s
+Step 15450 | Loss: 1.5932 | Grad Norm: 0.4253| LR: 0.000728 | Time: 1564.6s
+Step 15500 | Loss: 1.5454 | Grad Norm: 0.4206| LR: 0.000726 | Time: 1569.6s
+--- [验证] Step 15500 | Val Loss: 1.5863 ---
+Step 15550 | Loss: 1.5787 | Grad Norm: 0.4431| LR: 0.000725 | Time: 1575.2s
+Step 15600 | Loss: 1.5943 | Grad Norm: 0.4434| LR: 0.000723 | Time: 1580.2s
+Step 15650 | Loss: 1.4536 | Grad Norm: 0.4170| LR: 0.000721 | Time: 1585.2s
+Step 15700 | Loss: 1.4741 | Grad Norm: 0.4295| LR: 0.000720 | Time: 1590.2s
+Step 15750 | Loss: 1.6431 | Grad Norm: 0.4468| LR: 0.000718 | Time: 1595.1s
+Step 15800 | Loss: 1.5929 | Grad Norm: 0.4479| LR: 0.000716 | Time: 1600.1s
+Step 15850 | Loss: 1.5592 | Grad Norm: 0.4388| LR: 0.000715 | Time: 1605.1s
+Step 15900 | Loss: 1.5813 | Grad Norm: 0.4388| LR: 0.000713 | Time: 1610.1s
+Step 15950 | Loss: 1.5676 | Grad Norm: 0.4637| LR: 0.000711 | Time: 1615.1s
+Step 16000 | Loss: 1.5259 | Grad Norm: 0.4242| LR: 0.000710 | Time: 1620.1s
+--- [验证] Step 16000 | Val Loss: 1.5791 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 16050 | Loss: 1.6398 | Grad Norm: 0.4370| LR: 0.000708 | Time: 1626.1s
+Step 16100 | Loss: 1.5432 | Grad Norm: 0.4424| LR: 0.000706 | Time: 1631.1s
+Step 16150 | Loss: 1.5875 | Grad Norm: 0.4295| LR: 0.000704 | Time: 1636.1s
+Step 16200 | Loss: 1.5309 | Grad Norm: 0.4190| LR: 0.000703 | Time: 1641.1s
+Step 16250 | Loss: 1.5959 | Grad Norm: 0.4389| LR: 0.000701 | Time: 1646.0s
+Step 16300 | Loss: 1.6330 | Grad Norm: 0.4356| LR: 0.000699 | Time: 1651.0s
+Step 16350 | Loss: 1.4665 | Grad Norm: 0.4507| LR: 0.000698 | Time: 1656.0s
+Step 16400 | Loss: 1.4976 | Grad Norm: 0.4164| LR: 0.000696 | Time: 1661.0s
+Step 16450 | Loss: 1.6444 | Grad Norm: 0.4319| LR: 0.000694 | Time: 1666.0s
+Step 16500 | Loss: 1.5309 | Grad Norm: 0.4353| LR: 0.000693 | Time: 1671.0s
+--- [验证] Step 16500 | Val Loss: 1.5748 ---
+Step 16550 | Loss: 1.4582 | Grad Norm: 0.4273| LR: 0.000691 | Time: 1676.6s
+Step 16600 | Loss: 1.6452 | Grad Norm: 0.4738| LR: 0.000689 | Time: 1681.6s
+Step 16650 | Loss: 1.5011 | Grad Norm: 0.4207| LR: 0.000687 | Time: 1686.6s
+Step 16700 | Loss: 1.6494 | Grad Norm: 0.4359| LR: 0.000686 | Time: 1691.6s
+Step 16750 | Loss: 1.5764 | Grad Norm: 0.4527| LR: 0.000684 | Time: 1696.6s
+Step 16800 | Loss: 1.6942 | Grad Norm: 0.4633| LR: 0.000682 | Time: 1701.5s
+Step 16850 | Loss: 1.6039 | Grad Norm: 0.4306| LR: 0.000680 | Time: 1706.6s
+Step 16900 | Loss: 1.6157 | Grad Norm: 0.4495| LR: 0.000679 | Time: 1711.5s
+Step 16950 | Loss: 1.5455 | Grad Norm: 0.4258| LR: 0.000677 | Time: 1716.5s
+Step 17000 | Loss: 1.5194 | Grad Norm: 0.4448| LR: 0.000675 | Time: 1721.5s
+--- [验证] Step 17000 | Val Loss: 1.5734 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 17050 | Loss: 1.5682 | Grad Norm: 0.4480| LR: 0.000673 | Time: 1727.6s
+Step 17100 | Loss: 1.5323 | Grad Norm: 0.4260| LR: 0.000672 | Time: 1732.6s
+Step 17150 | Loss: 1.5078 | Grad Norm: 0.4379| LR: 0.000670 | Time: 1737.6s
+Step 17200 | Loss: 1.6011 | Grad Norm: 0.4440| LR: 0.000668 | Time: 1742.6s
+Step 17250 | Loss: 1.5075 | Grad Norm: 0.4363| LR: 0.000666 | Time: 1747.6s
+Step 17300 | Loss: 1.6560 | Grad Norm: 0.4654| LR: 0.000665 | Time: 1752.6s
+Step 17350 | Loss: 1.4888 | Grad Norm: 0.4438| LR: 0.000663 | Time: 1757.6s
+Step 17400 | Loss: 1.5476 | Grad Norm: 0.4372| LR: 0.000661 | Time: 1762.6s
+Step 17450 | Loss: 1.5801 | Grad Norm: 0.4395| LR: 0.000659 | Time: 1767.6s
+Step 17500 | Loss: 1.5906 | Grad Norm: 0.4520| LR: 0.000658 | Time: 1772.5s
+--- [验证] Step 17500 | Val Loss: 1.5680 ---
+Step 17550 | Loss: 1.5826 | Grad Norm: 0.4528| LR: 0.000656 | Time: 1778.1s
+Step 17600 | Loss: 1.4655 | Grad Norm: 0.4358| LR: 0.000654 | Time: 1783.1s
+Step 17650 | Loss: 1.5505 | Grad Norm: 0.4634| LR: 0.000652 | Time: 1788.1s
+Step 17700 | Loss: 1.6113 | Grad Norm: 0.4497| LR: 0.000651 | Time: 1793.1s
+Step 17750 | Loss: 1.5070 | Grad Norm: 0.4440| LR: 0.000649 | Time: 1798.1s
+Step 17800 | Loss: 1.5400 | Grad Norm: 0.4558| LR: 0.000647 | Time: 1803.1s
+Step 17850 | Loss: 1.5624 | Grad Norm: 0.4565| LR: 0.000645 | Time: 1808.1s
+Step 17900 | Loss: 1.6251 | Grad Norm: 0.4783| LR: 0.000644 | Time: 1813.1s
+Step 17950 | Loss: 1.4839 | Grad Norm: 0.4641| LR: 0.000642 | Time: 1818.1s
+Step 18000 | Loss: 1.6427 | Grad Norm: 0.4592| LR: 0.000640 | Time: 1823.0s
+--- [验证] Step 18000 | Val Loss: 1.5621 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 18050 | Loss: 1.5423 | Grad Norm: 0.4339| LR: 0.000638 | Time: 1829.0s
+Step 18100 | Loss: 1.4620 | Grad Norm: 0.4460| LR: 0.000636 | Time: 1834.0s
+Step 18150 | Loss: 1.4537 | Grad Norm: 0.4505| LR: 0.000635 | Time: 1839.0s
+Step 18200 | Loss: 1.5039 | Grad Norm: 0.4528| LR: 0.000633 | Time: 1844.0s
+Step 18250 | Loss: 1.6715 | Grad Norm: 0.4684| LR: 0.000631 | Time: 1849.0s
+Step 18300 | Loss: 1.6559 | Grad Norm: 0.4532| LR: 0.000629 | Time: 1854.0s
+Step 18350 | Loss: 1.6102 | Grad Norm: 0.4610| LR: 0.000628 | Time: 1859.0s
+Step 18400 | Loss: 1.6133 | Grad Norm: 0.4679| LR: 0.000626 | Time: 1864.0s
+Step 18450 | Loss: 1.6889 | Grad Norm: 0.4653| LR: 0.000624 | Time: 1868.9s
+Step 18500 | Loss: 1.4875 | Grad Norm: 0.4365| LR: 0.000622 | Time: 1873.9s
+--- [验证] Step 18500 | Val Loss: 1.5565 ---
+Step 18550 | Loss: 1.6016 | Grad Norm: 0.4376| LR: 0.000620 | Time: 1879.5s
+Step 18600 | Loss: 1.5937 | Grad Norm: 0.4648| LR: 0.000619 | Time: 1884.5s
+Step 18650 | Loss: 1.5734 | Grad Norm: 0.4624| LR: 0.000617 | Time: 1889.5s
+Step 18700 | Loss: 1.4486 | Grad Norm: 0.4432| LR: 0.000615 | Time: 1894.5s
+Step 18750 | Loss: 1.4036 | Grad Norm: 0.4406| LR: 0.000613 | Time: 1899.5s
+Step 18800 | Loss: 1.5412 | Grad Norm: 0.4527| LR: 0.000611 | Time: 1904.5s
+Step 18850 | Loss: 1.6157 | Grad Norm: 0.4622| LR: 0.000610 | Time: 1909.5s
+Step 18900 | Loss: 1.6024 | Grad Norm: 0.4574| LR: 0.000608 | Time: 1914.5s
+Step 18950 | Loss: 1.4623 | Grad Norm: 0.4547| LR: 0.000606 | Time: 1919.5s
+Step 19000 | Loss: 1.5298 | Grad Norm: 0.4593| LR: 0.000604 | Time: 1924.5s
+--- [验证] Step 19000 | Val Loss: 1.5515 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 19050 | Loss: 1.5497 | Grad Norm: 0.4495| LR: 0.000602 | Time: 1930.5s
+Step 19100 | Loss: 1.5091 | Grad Norm: 0.4624| LR: 0.000601 | Time: 1935.5s
+Step 19150 | Loss: 1.5738 | Grad Norm: 0.4496| LR: 0.000599 | Time: 1940.5s
+Step 19200 | Loss: 1.5709 | Grad Norm: 0.4652| LR: 0.000597 | Time: 1945.5s
+Step 19250 | Loss: 1.5371 | Grad Norm: 0.4570| LR: 0.000595 | Time: 1950.4s
+Step 19300 | Loss: 1.6010 | Grad Norm: 0.4734| LR: 0.000593 | Time: 1955.4s
+Step 19350 | Loss: 1.5816 | Grad Norm: 0.4880| LR: 0.000592 | Time: 1960.4s
+Step 19400 | Loss: 1.4830 | Grad Norm: 0.4604| LR: 0.000590 | Time: 1965.4s
+Step 19450 | Loss: 1.5548 | Grad Norm: 0.4525| LR: 0.000588 | Time: 1970.4s
+Step 19500 | Loss: 1.5807 | Grad Norm: 0.4630| LR: 0.000586 | Time: 1975.4s
+--- [验证] Step 19500 | Val Loss: 1.5494 ---
+Step 19550 | Loss: 1.5094 | Grad Norm: 0.4552| LR: 0.000584 | Time: 1981.0s
+Step 19600 | Loss: 1.5198 | Grad Norm: 0.4602| LR: 0.000583 | Time: 1986.0s
+Step 19650 | Loss: 1.5062 | Grad Norm: 0.4741| LR: 0.000581 | Time: 1991.0s
+Step 19700 | Loss: 1.4362 | Grad Norm: 0.4412| LR: 0.000579 | Time: 1996.0s
+Step 19750 | Loss: 1.6442 | Grad Norm: 0.4732| LR: 0.000577 | Time: 2001.0s
+Step 19800 | Loss: 1.5102 | Grad Norm: 0.4776| LR: 0.000575 | Time: 2006.0s
+Step 19850 | Loss: 1.5399 | Grad Norm: 0.4660| LR: 0.000574 | Time: 2011.0s
+Step 19900 | Loss: 1.6218 | Grad Norm: 0.4815| LR: 0.000572 | Time: 2016.0s
+Step 19950 | Loss: 1.5575 | Grad Norm: 0.4641| LR: 0.000570 | Time: 2020.9s
+Step 20000 | Loss: 1.4170 | Grad Norm: 0.4422| LR: 0.000568 | Time: 2025.9s
+--- [验证] Step 20000 | Val Loss: 1.5391 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 20050 | Loss: 1.5511 | Grad Norm: 0.4583| LR: 0.000566 | Time: 2031.9s
+Step 20100 | Loss: 1.5297 | Grad Norm: 0.4733| LR: 0.000564 | Time: 2036.9s
+Step 20150 | Loss: 1.5672 | Grad Norm: 0.4776| LR: 0.000563 | Time: 2041.8s
+Step 20200 | Loss: 1.4400 | Grad Norm: 0.4562| LR: 0.000561 | Time: 2046.8s
+Step 20250 | Loss: 1.4739 | Grad Norm: 0.4579| LR: 0.000559 | Time: 2051.8s
+Step 20300 | Loss: 1.5076 | Grad Norm: 0.4687| LR: 0.000557 | Time: 2056.7s
+Step 20350 | Loss: 1.4654 | Grad Norm: 0.4538| LR: 0.000555 | Time: 2061.7s
+Step 20400 | Loss: 1.5240 | Grad Norm: 0.4616| LR: 0.000554 | Time: 2066.7s
+Step 20450 | Loss: 1.5289 | Grad Norm: 0.4648| LR: 0.000552 | Time: 2071.7s
+Step 20500 | Loss: 1.4069 | Grad Norm: 0.4606| LR: 0.000550 | Time: 2076.6s
+--- [验证] Step 20500 | Val Loss: 1.5357 ---
+Step 20550 | Loss: 1.5285 | Grad Norm: 0.4633| LR: 0.000548 | Time: 2082.2s
+Step 20600 | Loss: 1.5054 | Grad Norm: 0.4946| LR: 0.000546 | Time: 2087.2s
+Step 20650 | Loss: 1.4999 | Grad Norm: 0.4611| LR: 0.000545 | Time: 2092.2s
+Step 20700 | Loss: 1.4798 | Grad Norm: 0.4509| LR: 0.000543 | Time: 2097.1s
+Step 20750 | Loss: 1.5306 | Grad Norm: 0.4590| LR: 0.000541 | Time: 2102.1s
+Step 20800 | Loss: 1.4556 | Grad Norm: 0.4684| LR: 0.000539 | Time: 2107.1s
+Step 20850 | Loss: 1.5167 | Grad Norm: 0.4687| LR: 0.000537 | Time: 2112.1s
+Step 20900 | Loss: 1.5328 | Grad Norm: 0.4592| LR: 0.000536 | Time: 2117.1s
+Step 20950 | Loss: 1.5163 | Grad Norm: 0.4793| LR: 0.000534 | Time: 2122.1s
+Step 21000 | Loss: 1.5627 | Grad Norm: 0.4725| LR: 0.000532 | Time: 2127.1s
+--- [验证] Step 21000 | Val Loss: 1.5304 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 21050 | Loss: 1.4979 | Grad Norm: 0.4596| LR: 0.000530 | Time: 2133.1s
+Step 21100 | Loss: 1.4884 | Grad Norm: 0.4787| LR: 0.000528 | Time: 2138.1s
+Step 21150 | Loss: 1.5357 | Grad Norm: 0.4965| LR: 0.000526 | Time: 2143.1s
+Step 21200 | Loss: 1.5007 | Grad Norm: 0.4566| LR: 0.000525 | Time: 2148.1s
+Step 21250 | Loss: 1.5858 | Grad Norm: 0.4784| LR: 0.000523 | Time: 2153.1s
+Step 21300 | Loss: 1.5274 | Grad Norm: 0.4818| LR: 0.000521 | Time: 2158.1s
+Step 21350 | Loss: 1.5346 | Grad Norm: 0.4947| LR: 0.000519 | Time: 2163.1s
+Step 21400 | Loss: 1.4235 | Grad Norm: 0.4586| LR: 0.000517 | Time: 2168.0s
+Step 21450 | Loss: 1.5774 | Grad Norm: 0.4967| LR: 0.000516 | Time: 2173.0s
+Step 21500 | Loss: 1.4262 | Grad Norm: 0.4709| LR: 0.000514 | Time: 2178.0s
+--- [验证] Step 21500 | Val Loss: 1.5253 ---
+Step 21550 | Loss: 1.4583 | Grad Norm: 0.4696| LR: 0.000512 | Time: 2183.6s
+Step 21600 | Loss: 1.4172 | Grad Norm: 0.4762| LR: 0.000510 | Time: 2188.6s
+Step 21650 | Loss: 1.5548 | Grad Norm: 0.4736| LR: 0.000508 | Time: 2193.6s
+Step 21700 | Loss: 1.5347 | Grad Norm: 0.4966| LR: 0.000507 | Time: 2198.6s
+Step 21750 | Loss: 1.4353 | Grad Norm: 0.4926| LR: 0.000505 | Time: 2203.5s
+Step 21800 | Loss: 1.4309 | Grad Norm: 0.4622| LR: 0.000503 | Time: 2208.5s
+Step 21850 | Loss: 1.4024 | Grad Norm: 0.4682| LR: 0.000501 | Time: 2213.5s
+Step 21900 | Loss: 1.5393 | Grad Norm: 0.4698| LR: 0.000499 | Time: 2218.5s
+Step 21950 | Loss: 1.4062 | Grad Norm: 0.4554| LR: 0.000498 | Time: 2223.5s
+Step 22000 | Loss: 1.4646 | Grad Norm: 0.4729| LR: 0.000496 | Time: 2228.5s
+--- [验证] Step 22000 | Val Loss: 1.5214 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 22050 | Loss: 1.4535 | Grad Norm: 0.4568| LR: 0.000494 | Time: 2234.6s
+Step 22100 | Loss: 1.4502 | Grad Norm: 0.4954| LR: 0.000492 | Time: 2239.6s
+Step 22150 | Loss: 1.4681 | Grad Norm: 0.4807| LR: 0.000490 | Time: 2244.6s
+Step 22200 | Loss: 1.4738 | Grad Norm: 0.4771| LR: 0.000489 | Time: 2249.5s
+Step 22250 | Loss: 1.5649 | Grad Norm: 0.4838| LR: 0.000487 | Time: 2254.5s
+Step 22300 | Loss: 1.4404 | Grad Norm: 0.4720| LR: 0.000485 | Time: 2259.5s
+Step 22350 | Loss: 1.4748 | Grad Norm: 0.4676| LR: 0.000483 | Time: 2264.5s
+Step 22400 | Loss: 1.5569 | Grad Norm: 0.4834| LR: 0.000481 | Time: 2269.5s
+Step 22450 | Loss: 1.4812 | Grad Norm: 0.4910| LR: 0.000480 | Time: 2274.5s
+Step 22500 | Loss: 1.4726 | Grad Norm: 0.4820| LR: 0.000478 | Time: 2279.5s
+--- [验证] Step 22500 | Val Loss: 1.5186 ---
+Step 22550 | Loss: 1.4607 | Grad Norm: 0.4858| LR: 0.000476 | Time: 2285.1s
+Step 22600 | Loss: 1.5832 | Grad Norm: 0.4959| LR: 0.000474 | Time: 2290.1s
+Step 22650 | Loss: 1.4236 | Grad Norm: 0.4766| LR: 0.000472 | Time: 2295.1s
+Step 22700 | Loss: 1.6976 | Grad Norm: 0.5160| LR: 0.000471 | Time: 2300.1s
+Step 22750 | Loss: 1.4275 | Grad Norm: 0.4865| LR: 0.000469 | Time: 2305.1s
+Step 22800 | Loss: 1.5542 | Grad Norm: 0.4900| LR: 0.000467 | Time: 2310.1s
+Step 22850 | Loss: 1.5165 | Grad Norm: 0.5000| LR: 0.000465 | Time: 2315.1s
+Step 22900 | Loss: 1.5068 | Grad Norm: 0.4747| LR: 0.000464 | Time: 2320.1s
+Step 22950 | Loss: 1.4297 | Grad Norm: 0.4849| LR: 0.000462 | Time: 2325.0s
+Step 23000 | Loss: 1.4779 | Grad Norm: 0.4842| LR: 0.000460 | Time: 2330.0s
+--- [验证] Step 23000 | Val Loss: 1.5127 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 23050 | Loss: 1.5586 | Grad Norm: 0.5038| LR: 0.000458 | Time: 2336.1s
+Step 23100 | Loss: 1.6004 | Grad Norm: 0.5108| LR: 0.000456 | Time: 2341.1s
+Step 23150 | Loss: 1.3665 | Grad Norm: 0.4713| LR: 0.000455 | Time: 2346.1s
+Step 23200 | Loss: 1.4428 | Grad Norm: 0.4908| LR: 0.000453 | Time: 2351.1s
+Step 23250 | Loss: 1.4979 | Grad Norm: 0.4849| LR: 0.000451 | Time: 2356.0s
+Step 23300 | Loss: 1.5139 | Grad Norm: 0.5031| LR: 0.000449 | Time: 2361.0s
+Step 23350 | Loss: 1.4309 | Grad Norm: 0.4969| LR: 0.000448 | Time: 2366.0s
+Step 23400 | Loss: 1.3989 | Grad Norm: 0.4639| LR: 0.000446 | Time: 2371.0s
+Step 23450 | Loss: 1.4743 | Grad Norm: 0.4837| LR: 0.000444 | Time: 2376.0s
+Step 23500 | Loss: 1.5215 | Grad Norm: 0.4965| LR: 0.000442 | Time: 2381.0s
+--- [验证] Step 23500 | Val Loss: 1.5109 ---
+Step 23550 | Loss: 1.4310 | Grad Norm: 0.4786| LR: 0.000441 | Time: 2386.6s
+Step 23600 | Loss: 1.4515 | Grad Norm: 0.4988| LR: 0.000439 | Time: 2391.6s
+Step 23650 | Loss: 1.4950 | Grad Norm: 0.4785| LR: 0.000437 | Time: 2396.6s
+Step 23700 | Loss: 1.4991 | Grad Norm: 0.5056| LR: 0.000435 | Time: 2401.6s
+Step 23750 | Loss: 1.4560 | Grad Norm: 0.4892| LR: 0.000434 | Time: 2406.6s
+Step 23800 | Loss: 1.5361 | Grad Norm: 0.5011| LR: 0.000432 | Time: 2411.5s
+Step 23850 | Loss: 1.5326 | Grad Norm: 0.4942| LR: 0.000430 | Time: 2416.5s
+Step 23900 | Loss: 1.4116 | Grad Norm: 0.4825| LR: 0.000428 | Time: 2421.5s
+Step 23950 | Loss: 1.4059 | Grad Norm: 0.5126| LR: 0.000427 | Time: 2426.5s
+Step 24000 | Loss: 1.4678 | Grad Norm: 0.5031| LR: 0.000425 | Time: 2431.5s
+--- [验证] Step 24000 | Val Loss: 1.5025 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 24050 | Loss: 1.4609 | Grad Norm: 0.5142| LR: 0.000423 | Time: 2437.5s
+Step 24100 | Loss: 1.4707 | Grad Norm: 0.4836| LR: 0.000421 | Time: 2442.5s
+Step 24150 | Loss: 1.5145 | Grad Norm: 0.4966| LR: 0.000420 | Time: 2447.5s
+Step 24200 | Loss: 1.4869 | Grad Norm: 0.5040| LR: 0.000418 | Time: 2452.5s
+Step 24250 | Loss: 1.4997 | Grad Norm: 0.4986| LR: 0.000416 | Time: 2457.5s
+Step 24300 | Loss: 1.3072 | Grad Norm: 0.4934| LR: 0.000414 | Time: 2462.5s
+Step 24350 | Loss: 1.5215 | Grad Norm: 0.4848| LR: 0.000413 | Time: 2467.5s
+Step 24400 | Loss: 1.4831 | Grad Norm: 0.5066| LR: 0.000411 | Time: 2472.4s
+Step 24450 | Loss: 1.4620 | Grad Norm: 0.5026| LR: 0.000409 | Time: 2477.4s
+Step 24500 | Loss: 1.5466 | Grad Norm: 0.5282| LR: 0.000407 | Time: 2482.4s
+--- [验证] Step 24500 | Val Loss: 1.4971 ---
+Step 24550 | Loss: 1.4951 | Grad Norm: 0.5106| LR: 0.000406 | Time: 2488.0s
+Step 24600 | Loss: 1.3858 | Grad Norm: 0.4976| LR: 0.000404 | Time: 2493.0s
+Step 24650 | Loss: 1.4944 | Grad Norm: 0.5131| LR: 0.000402 | Time: 2498.0s
+Step 24700 | Loss: 1.5539 | Grad Norm: 0.5248| LR: 0.000401 | Time: 2503.0s
+Step 24750 | Loss: 1.6200 | Grad Norm: 0.5102| LR: 0.000399 | Time: 2508.0s
+Step 24800 | Loss: 1.5164 | Grad Norm: 0.5375| LR: 0.000397 | Time: 2513.0s
+Step 24850 | Loss: 1.5395 | Grad Norm: 0.5073| LR: 0.000396 | Time: 2517.9s
+Step 24900 | Loss: 1.4294 | Grad Norm: 0.5201| LR: 0.000394 | Time: 2522.9s
+Step 24950 | Loss: 1.4380 | Grad Norm: 0.4929| LR: 0.000392 | Time: 2527.9s
+Step 25000 | Loss: 1.4923 | Grad Norm: 0.5113| LR: 0.000390 | Time: 2532.9s
+--- [验证] Step 25000 | Val Loss: 1.4941 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 25050 | Loss: 1.3852 | Grad Norm: 0.5184| LR: 0.000389 | Time: 2538.9s
+Step 25100 | Loss: 1.4794 | Grad Norm: 0.5181| LR: 0.000387 | Time: 2543.9s
+Step 25150 | Loss: 1.4051 | Grad Norm: 0.5258| LR: 0.000385 | Time: 2548.9s
+Step 25200 | Loss: 1.4386 | Grad Norm: 0.4879| LR: 0.000384 | Time: 2553.9s
+Step 25250 | Loss: 1.4379 | Grad Norm: 0.5323| LR: 0.000382 | Time: 2558.9s
+Step 25300 | Loss: 1.4819 | Grad Norm: 0.5171| LR: 0.000380 | Time: 2563.8s
+Step 25350 | Loss: 1.4709 | Grad Norm: 0.4966| LR: 0.000379 | Time: 2568.8s
+Step 25400 | Loss: 1.3839 | Grad Norm: 0.5066| LR: 0.000377 | Time: 2573.8s
+Step 25450 | Loss: 1.4213 | Grad Norm: 0.4928| LR: 0.000375 | Time: 2578.8s
+Step 25500 | Loss: 1.4289 | Grad Norm: 0.5056| LR: 0.000374 | Time: 2583.8s
+--- [验证] Step 25500 | Val Loss: 1.4869 ---
+Step 25550 | Loss: 1.4194 | Grad Norm: 0.5206| LR: 0.000372 | Time: 2589.4s
+Step 25600 | Loss: 1.4359 | Grad Norm: 0.4940| LR: 0.000370 | Time: 2594.4s
+Step 25650 | Loss: 1.4878 | Grad Norm: 0.5068| LR: 0.000369 | Time: 2599.4s
+Step 25700 | Loss: 1.6008 | Grad Norm: 0.5325| LR: 0.000367 | Time: 2604.4s
+Step 25750 | Loss: 1.5091 | Grad Norm: 0.5300| LR: 0.000365 | Time: 2609.4s
+Step 25800 | Loss: 1.4702 | Grad Norm: 0.5126| LR: 0.000364 | Time: 2614.4s
+Step 25850 | Loss: 1.5350 | Grad Norm: 0.5287| LR: 0.000362 | Time: 2619.3s
+Step 25900 | Loss: 1.6048 | Grad Norm: 0.8056| LR: 0.000360 | Time: 2624.3s
+Step 25950 | Loss: 1.3952 | Grad Norm: 0.5036| LR: 0.000359 | Time: 2629.3s
+Step 26000 | Loss: 1.5666 | Grad Norm: 0.5162| LR: 0.000357 | Time: 2634.3s
+--- [验证] Step 26000 | Val Loss: 1.4822 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 26050 | Loss: 1.4715 | Grad Norm: 0.5147| LR: 0.000355 | Time: 2640.3s
+Step 26100 | Loss: 1.4773 | Grad Norm: 0.5057| LR: 0.000354 | Time: 2645.3s
+Step 26150 | Loss: 1.3758 | Grad Norm: 0.5097| LR: 0.000352 | Time: 2650.3s
+Step 26200 | Loss: 1.3824 | Grad Norm: 0.5032| LR: 0.000351 | Time: 2655.3s
+Step 26250 | Loss: 1.5228 | Grad Norm: 0.5170| LR: 0.000349 | Time: 2660.3s
+Step 26300 | Loss: 1.3489 | Grad Norm: 0.5165| LR: 0.000347 | Time: 2665.3s
+Step 26350 | Loss: 1.3913 | Grad Norm: 0.5008| LR: 0.000346 | Time: 2670.3s
+Step 26400 | Loss: 1.5007 | Grad Norm: 0.5266| LR: 0.000344 | Time: 2675.3s
+Step 26450 | Loss: 1.3996 | Grad Norm: 0.5033| LR: 0.000342 | Time: 2680.3s
+Step 26500 | Loss: 1.4580 | Grad Norm: 0.5329| LR: 0.000341 | Time: 2685.3s
+--- [验证] Step 26500 | Val Loss: 1.4768 ---
+Step 26550 | Loss: 1.4438 | Grad Norm: 0.5189| LR: 0.000339 | Time: 2690.9s
+Step 26600 | Loss: 1.4816 | Grad Norm: 0.5211| LR: 0.000338 | Time: 2695.9s
+Step 26650 | Loss: 1.4724 | Grad Norm: 0.5609| LR: 0.000336 | Time: 2700.9s
+Step 26700 | Loss: 1.3824 | Grad Norm: 0.5011| LR: 0.000334 | Time: 2705.9s
+Step 26750 | Loss: 1.4618 | Grad Norm: 0.5197| LR: 0.000333 | Time: 2710.9s
+Step 26800 | Loss: 1.3682 | Grad Norm: 0.5121| LR: 0.000331 | Time: 2715.8s
+Step 26850 | Loss: 1.4613 | Grad Norm: 0.5153| LR: 0.000330 | Time: 2720.8s
+Step 26900 | Loss: 1.5342 | Grad Norm: 0.5203| LR: 0.000328 | Time: 2725.8s
+Step 26950 | Loss: 1.4847 | Grad Norm: 0.5307| LR: 0.000327 | Time: 2730.8s
+Step 27000 | Loss: 1.3862 | Grad Norm: 0.5109| LR: 0.000325 | Time: 2735.8s
+--- [验证] Step 27000 | Val Loss: 1.4736 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 27050 | Loss: 1.4390 | Grad Norm: 0.5025| LR: 0.000323 | Time: 2741.8s
+Step 27100 | Loss: 1.3439 | Grad Norm: 0.5369| LR: 0.000322 | Time: 2746.8s
+Step 27150 | Loss: 1.4670 | Grad Norm: 0.5225| LR: 0.000320 | Time: 2751.8s
+Step 27200 | Loss: 1.5086 | Grad Norm: 0.5437| LR: 0.000319 | Time: 2756.8s
+Step 27250 | Loss: 1.4124 | Grad Norm: 0.5110| LR: 0.000317 | Time: 2761.8s
+Step 27300 | Loss: 1.4223 | Grad Norm: 0.5202| LR: 0.000316 | Time: 2766.8s
+Step 27350 | Loss: 1.4464 | Grad Norm: 0.5245| LR: 0.000314 | Time: 2771.8s
+Step 27400 | Loss: 1.4863 | Grad Norm: 0.5046| LR: 0.000313 | Time: 2776.8s
+Step 27450 | Loss: 1.5071 | Grad Norm: 0.5459| LR: 0.000311 | Time: 2781.8s
+Step 27500 | Loss: 1.4368 | Grad Norm: 0.5240| LR: 0.000309 | Time: 2786.8s
+--- [验证] Step 27500 | Val Loss: 1.4698 ---
+Step 27550 | Loss: 1.4254 | Grad Norm: 0.5357| LR: 0.000308 | Time: 2792.4s
+Step 27600 | Loss: 1.4110 | Grad Norm: 0.5222| LR: 0.000306 | Time: 2797.3s
+Step 27650 | Loss: 1.4045 | Grad Norm: 0.5177| LR: 0.000305 | Time: 2802.3s
+Step 27700 | Loss: 1.4328 | Grad Norm: 0.5250| LR: 0.000303 | Time: 2807.3s
+Step 27750 | Loss: 1.4705 | Grad Norm: 0.5426| LR: 0.000302 | Time: 2812.3s
+Step 27800 | Loss: 1.5042 | Grad Norm: 0.5269| LR: 0.000300 | Time: 2817.3s
+Step 27850 | Loss: 1.3928 | Grad Norm: 0.5479| LR: 0.000299 | Time: 2822.3s
+Step 27900 | Loss: 1.4651 | Grad Norm: 0.5378| LR: 0.000297 | Time: 2827.3s
+Step 27950 | Loss: 1.5362 | Grad Norm: 0.5369| LR: 0.000296 | Time: 2832.2s
+Step 28000 | Loss: 1.5295 | Grad Norm: 0.5660| LR: 0.000294 | Time: 2837.2s
+--- [验证] Step 28000 | Val Loss: 1.4649 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 28050 | Loss: 1.5909 | Grad Norm: 0.5398| LR: 0.000293 | Time: 2843.3s
+Step 28100 | Loss: 1.4268 | Grad Norm: 0.5153| LR: 0.000291 | Time: 2848.3s
+Step 28150 | Loss: 1.4330 | Grad Norm: 0.5350| LR: 0.000290 | Time: 2853.3s
+Step 28200 | Loss: 1.4790 | Grad Norm: 0.5415| LR: 0.000288 | Time: 2858.2s
+Step 28250 | Loss: 1.3807 | Grad Norm: 0.5471| LR: 0.000287 | Time: 2863.2s
+Step 28300 | Loss: 1.4993 | Grad Norm: 0.5463| LR: 0.000285 | Time: 2868.2s
+Step 28350 | Loss: 1.4358 | Grad Norm: 0.5527| LR: 0.000284 | Time: 2873.2s
+Step 28400 | Loss: 1.4904 | Grad Norm: 0.5347| LR: 0.000283 | Time: 2878.2s
+Step 28450 | Loss: 1.4351 | Grad Norm: 0.5340| LR: 0.000281 | Time: 2883.2s
+Step 28500 | Loss: 1.4098 | Grad Norm: 0.5271| LR: 0.000280 | Time: 2888.2s
+--- [验证] Step 28500 | Val Loss: 1.4603 ---
+Step 28550 | Loss: 1.4639 | Grad Norm: 0.5265| LR: 0.000278 | Time: 2893.8s
+Step 28600 | Loss: 1.4006 | Grad Norm: 0.5370| LR: 0.000277 | Time: 2898.8s
+Step 28650 | Loss: 1.4962 | Grad Norm: 0.5504| LR: 0.000275 | Time: 2903.8s
+Step 28700 | Loss: 1.5240 | Grad Norm: 0.5786| LR: 0.000274 | Time: 2908.7s
+Step 28750 | Loss: 1.4210 | Grad Norm: 0.5390| LR: 0.000272 | Time: 2913.7s
+Step 28800 | Loss: 1.4855 | Grad Norm: 0.5695| LR: 0.000271 | Time: 2918.7s
+Step 28850 | Loss: 1.3889 | Grad Norm: 0.5297| LR: 0.000270 | Time: 2923.7s
+Step 28900 | Loss: 1.3746 | Grad Norm: 0.5472| LR: 0.000268 | Time: 2928.7s
+Step 28950 | Loss: 1.5330 | Grad Norm: 0.5425| LR: 0.000267 | Time: 2933.7s
+Step 29000 | Loss: 1.4008 | Grad Norm: 0.5384| LR: 0.000265 | Time: 2938.7s
+--- [验证] Step 29000 | Val Loss: 1.4571 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 29050 | Loss: 1.4558 | Grad Norm: 0.5487| LR: 0.000264 | Time: 2944.7s
+Step 29100 | Loss: 1.3819 | Grad Norm: 0.5127| LR: 0.000263 | Time: 2949.7s
+Step 29150 | Loss: 1.4496 | Grad Norm: 0.5536| LR: 0.000261 | Time: 2954.7s
+Step 29200 | Loss: 1.5342 | Grad Norm: 0.5532| LR: 0.000260 | Time: 2959.6s
+Step 29250 | Loss: 1.4093 | Grad Norm: 0.5278| LR: 0.000258 | Time: 2964.6s
+Step 29300 | Loss: 1.4025 | Grad Norm: 0.5518| LR: 0.000257 | Time: 2969.6s
+Step 29350 | Loss: 1.4289 | Grad Norm: 0.5512| LR: 0.000256 | Time: 2974.6s
+Step 29400 | Loss: 1.4953 | Grad Norm: 0.5460| LR: 0.000254 | Time: 2979.6s
+Step 29450 | Loss: 1.4113 | Grad Norm: 0.5353| LR: 0.000253 | Time: 2984.6s
+Step 29500 | Loss: 1.5084 | Grad Norm: 0.5739| LR: 0.000252 | Time: 2989.6s
+--- [验证] Step 29500 | Val Loss: 1.4529 ---
+Step 29550 | Loss: 1.4087 | Grad Norm: 0.5412| LR: 0.000250 | Time: 2995.1s
+Step 29600 | Loss: 1.5934 | Grad Norm: 0.5703| LR: 0.000249 | Time: 3000.1s
+Step 29650 | Loss: 1.3969 | Grad Norm: 0.5372| LR: 0.000248 | Time: 3005.1s
+Step 29700 | Loss: 1.4117 | Grad Norm: 0.5515| LR: 0.000246 | Time: 3010.1s
+Step 29750 | Loss: 1.4555 | Grad Norm: 0.5488| LR: 0.000245 | Time: 3015.1s
+Step 29800 | Loss: 1.4309 | Grad Norm: 0.5541| LR: 0.000244 | Time: 3020.1s
+Step 29850 | Loss: 1.3808 | Grad Norm: 0.5427| LR: 0.000242 | Time: 3025.1s
+Step 29900 | Loss: 1.3795 | Grad Norm: 0.5483| LR: 0.000241 | Time: 3030.1s
+Step 29950 | Loss: 1.4786 | Grad Norm: 0.5400| LR: 0.000240 | Time: 3035.1s
+Step 30000 | Loss: 1.4051 | Grad Norm: 0.5294| LR: 0.000238 | Time: 3040.1s
+--- [验证] Step 30000 | Val Loss: 1.4472 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 30050 | Loss: 1.4040 | Grad Norm: 0.5407| LR: 0.000237 | Time: 3046.0s
+Step 30100 | Loss: 1.5042 | Grad Norm: 0.5532| LR: 0.000236 | Time: 3051.0s
+Step 30150 | Loss: 1.5152 | Grad Norm: 0.5503| LR: 0.000234 | Time: 3056.0s
+Step 30200 | Loss: 1.4356 | Grad Norm: 0.5490| LR: 0.000233 | Time: 3061.0s
+Step 30250 | Loss: 1.3824 | Grad Norm: 0.5450| LR: 0.000232 | Time: 3066.0s
+Step 30300 | Loss: 1.5312 | Grad Norm: 0.5510| LR: 0.000231 | Time: 3071.0s
+Step 30350 | Loss: 1.3928 | Grad Norm: 0.5552| LR: 0.000229 | Time: 3076.0s
+Step 30400 | Loss: 1.5081 | Grad Norm: 0.5664| LR: 0.000228 | Time: 3081.0s
+Step 30450 | Loss: 1.2989 | Grad Norm: 0.5467| LR: 0.000227 | Time: 3086.0s
+Step 30500 | Loss: 1.4159 | Grad Norm: 0.5469| LR: 0.000225 | Time: 3090.9s
+--- [验证] Step 30500 | Val Loss: 1.4453 ---
+Step 30550 | Loss: 1.4103 | Grad Norm: 0.5679| LR: 0.000224 | Time: 3096.5s
+Step 30600 | Loss: 1.4804 | Grad Norm: 0.5562| LR: 0.000223 | Time: 3101.5s
+Step 30650 | Loss: 1.3065 | Grad Norm: 0.5144| LR: 0.000222 | Time: 3106.5s
+Step 30700 | Loss: 1.4631 | Grad Norm: 0.5680| LR: 0.000220 | Time: 3111.5s
+Step 30750 | Loss: 1.4009 | Grad Norm: 0.5500| LR: 0.000219 | Time: 3116.5s
+Step 30800 | Loss: 1.4664 | Grad Norm: 0.5664| LR: 0.000218 | Time: 3121.5s
+Step 30850 | Loss: 1.4326 | Grad Norm: 0.5539| LR: 0.000217 | Time: 3126.5s
+Step 30900 | Loss: 1.4360 | Grad Norm: 0.5484| LR: 0.000216 | Time: 3131.5s
+Step 30950 | Loss: 1.5594 | Grad Norm: 0.5737| LR: 0.000214 | Time: 3136.5s
+Step 31000 | Loss: 1.4523 | Grad Norm: 0.5481| LR: 0.000213 | Time: 3141.4s
+--- [验证] Step 31000 | Val Loss: 1.4402 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 31050 | Loss: 1.4003 | Grad Norm: 0.5467| LR: 0.000212 | Time: 3147.5s
+Step 31100 | Loss: 1.4796 | Grad Norm: 0.5495| LR: 0.000211 | Time: 3152.5s
+Step 31150 | Loss: 1.4107 | Grad Norm: 0.5456| LR: 0.000210 | Time: 3157.5s
+Step 31200 | Loss: 1.3518 | Grad Norm: 0.5488| LR: 0.000208 | Time: 3162.5s
+Step 31250 | Loss: 1.4357 | Grad Norm: 0.5639| LR: 0.000207 | Time: 3167.5s
+Step 31300 | Loss: 1.5006 | Grad Norm: 0.5693| LR: 0.000206 | Time: 3172.5s
+Step 31350 | Loss: 1.4276 | Grad Norm: 0.5456| LR: 0.000205 | Time: 3177.5s
+Step 31400 | Loss: 1.4393 | Grad Norm: 0.5649| LR: 0.000204 | Time: 3182.5s
+Step 31450 | Loss: 1.4516 | Grad Norm: 0.5772| LR: 0.000203 | Time: 3187.4s
+Step 31500 | Loss: 1.3259 | Grad Norm: 0.5662| LR: 0.000201 | Time: 3192.4s
+--- [验证] Step 31500 | Val Loss: 1.4373 ---
+Step 31550 | Loss: 1.3682 | Grad Norm: 0.5463| LR: 0.000200 | Time: 3198.0s
+Step 31600 | Loss: 1.3948 | Grad Norm: 0.5572| LR: 0.000199 | Time: 3203.0s
+Step 31650 | Loss: 1.4838 | Grad Norm: 0.5552| LR: 0.000198 | Time: 3208.0s
+Step 31700 | Loss: 1.3404 | Grad Norm: 0.5412| LR: 0.000197 | Time: 3213.0s
+Step 31750 | Loss: 1.4828 | Grad Norm: 0.5804| LR: 0.000196 | Time: 3218.0s
+Step 31800 | Loss: 1.3810 | Grad Norm: 0.5509| LR: 0.000195 | Time: 3222.9s
+Step 31850 | Loss: 1.3648 | Grad Norm: 0.5605| LR: 0.000194 | Time: 3227.9s
+Step 31900 | Loss: 1.3495 | Grad Norm: 0.5487| LR: 0.000192 | Time: 3232.9s
+Step 31950 | Loss: 1.3695 | Grad Norm: 0.5669| LR: 0.000191 | Time: 3237.9s
+Step 32000 | Loss: 1.3671 | Grad Norm: 0.5638| LR: 0.000190 | Time: 3242.9s
+--- [验证] Step 32000 | Val Loss: 1.4346 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 32050 | Loss: 1.3727 | Grad Norm: 0.5551| LR: 0.000189 | Time: 3248.9s
+Step 32100 | Loss: 1.4559 | Grad Norm: 0.5761| LR: 0.000188 | Time: 3253.9s
+Step 32150 | Loss: 1.4436 | Grad Norm: 0.5667| LR: 0.000187 | Time: 3258.9s
+Step 32200 | Loss: 1.4484 | Grad Norm: 0.5758| LR: 0.000186 | Time: 3263.8s
+Step 32250 | Loss: 1.3653 | Grad Norm: 0.5451| LR: 0.000185 | Time: 3268.8s
+Step 32300 | Loss: 1.3776 | Grad Norm: 0.5655| LR: 0.000184 | Time: 3273.8s
+Step 32350 | Loss: 1.4343 | Grad Norm: 0.5504| LR: 0.000183 | Time: 3278.8s
+Step 32400 | Loss: 1.4897 | Grad Norm: 0.5817| LR: 0.000182 | Time: 3283.8s
+Step 32450 | Loss: 1.3799 | Grad Norm: 0.5580| LR: 0.000181 | Time: 3288.8s
+Step 32500 | Loss: 1.3975 | Grad Norm: 0.5638| LR: 0.000180 | Time: 3293.8s
+--- [验证] Step 32500 | Val Loss: 1.4293 ---
+Step 32550 | Loss: 1.4063 | Grad Norm: 0.5681| LR: 0.000179 | Time: 3299.4s
+Step 32600 | Loss: 1.4720 | Grad Norm: 0.5861| LR: 0.000178 | Time: 3304.4s
+Step 32650 | Loss: 1.5374 | Grad Norm: 0.5869| LR: 0.000177 | Time: 3309.4s
+Step 32700 | Loss: 1.4099 | Grad Norm: 0.5807| LR: 0.000176 | Time: 3314.3s
+Step 32750 | Loss: 1.4117 | Grad Norm: 0.5705| LR: 0.000175 | Time: 3319.3s
+Step 32800 | Loss: 1.4231 | Grad Norm: 0.5767| LR: 0.000174 | Time: 3324.3s
+Step 32850 | Loss: 1.4447 | Grad Norm: 0.5599| LR: 0.000173 | Time: 3329.3s
+Step 32900 | Loss: 1.4408 | Grad Norm: 0.5546| LR: 0.000172 | Time: 3334.3s
+Step 32950 | Loss: 1.3904 | Grad Norm: 0.5470| LR: 0.000171 | Time: 3339.3s
+Step 33000 | Loss: 1.3699 | Grad Norm: 0.5656| LR: 0.000170 | Time: 3344.3s
+--- [验证] Step 33000 | Val Loss: 1.4272 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 33050 | Loss: 1.3642 | Grad Norm: 0.5695| LR: 0.000169 | Time: 3350.4s
+Step 33100 | Loss: 1.4404 | Grad Norm: 0.5556| LR: 0.000168 | Time: 3355.3s
+Step 33150 | Loss: 1.2645 | Grad Norm: 0.5735| LR: 0.000167 | Time: 3360.3s
+Step 33200 | Loss: 1.5086 | Grad Norm: 0.5710| LR: 0.000166 | Time: 3365.3s
+Step 33250 | Loss: 1.4627 | Grad Norm: 0.5763| LR: 0.000165 | Time: 3370.3s
+Step 33300 | Loss: 1.3936 | Grad Norm: 0.5991| LR: 0.000164 | Time: 3375.3s
+Step 33350 | Loss: 1.4038 | Grad Norm: 0.5768| LR: 0.000163 | Time: 3380.3s
+Step 33400 | Loss: 1.4357 | Grad Norm: 0.5736| LR: 0.000162 | Time: 3385.3s
+Step 33450 | Loss: 1.4713 | Grad Norm: 0.5749| LR: 0.000161 | Time: 3390.3s
+Step 33500 | Loss: 1.3881 | Grad Norm: 0.5642| LR: 0.000160 | Time: 3395.3s
+--- [验证] Step 33500 | Val Loss: 1.4239 ---
+Step 33550 | Loss: 1.3383 | Grad Norm: 0.5684| LR: 0.000159 | Time: 3400.9s
+Step 33600 | Loss: 1.3549 | Grad Norm: 0.5513| LR: 0.000158 | Time: 3405.9s
+Step 33650 | Loss: 1.4205 | Grad Norm: 0.6002| LR: 0.000158 | Time: 3410.9s
+Step 33700 | Loss: 1.4589 | Grad Norm: 0.5911| LR: 0.000157 | Time: 3415.8s
+Step 33750 | Loss: 1.3873 | Grad Norm: 0.5645| LR: 0.000156 | Time: 3420.8s
+Step 33800 | Loss: 1.4396 | Grad Norm: 0.6113| LR: 0.000155 | Time: 3425.8s
+Step 33850 | Loss: 1.3277 | Grad Norm: 0.5546| LR: 0.000154 | Time: 3430.8s
+Step 33900 | Loss: 1.3974 | Grad Norm: 0.5855| LR: 0.000153 | Time: 3435.7s
+Step 33950 | Loss: 1.5449 | Grad Norm: 0.5863| LR: 0.000152 | Time: 3440.7s
+Step 34000 | Loss: 1.4723 | Grad Norm: 0.5914| LR: 0.000152 | Time: 3445.7s
+--- [验证] Step 34000 | Val Loss: 1.4209 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 34050 | Loss: 1.4137 | Grad Norm: 0.5724| LR: 0.000151 | Time: 3451.7s
+Step 34100 | Loss: 1.2578 | Grad Norm: 0.5454| LR: 0.000150 | Time: 3456.7s
+Step 34150 | Loss: 1.4272 | Grad Norm: 0.5940| LR: 0.000149 | Time: 3461.7s
+Step 34200 | Loss: 1.4210 | Grad Norm: 0.5936| LR: 0.000148 | Time: 3466.7s
+Step 34250 | Loss: 1.3486 | Grad Norm: 0.5612| LR: 0.000147 | Time: 3471.7s
+Step 34300 | Loss: 1.4017 | Grad Norm: 0.5873| LR: 0.000147 | Time: 3476.7s
+Step 34350 | Loss: 1.3677 | Grad Norm: 0.5777| LR: 0.000146 | Time: 3481.7s
+Step 34400 | Loss: 1.3335 | Grad Norm: 0.5614| LR: 0.000145 | Time: 3486.7s
+Step 34450 | Loss: 1.4166 | Grad Norm: 0.5736| LR: 0.000144 | Time: 3491.6s
+Step 34500 | Loss: 1.4270 | Grad Norm: 0.5900| LR: 0.000143 | Time: 3496.6s
+--- [验证] Step 34500 | Val Loss: 1.4190 ---
+Step 34550 | Loss: 1.4280 | Grad Norm: 0.5985| LR: 0.000143 | Time: 3502.2s
+Step 34600 | Loss: 1.6034 | Grad Norm: 0.6003| LR: 0.000142 | Time: 3507.2s
+Step 34650 | Loss: 1.4492 | Grad Norm: 0.6486| LR: 0.000141 | Time: 3512.2s
+Step 34700 | Loss: 1.3645 | Grad Norm: 0.5787| LR: 0.000140 | Time: 3517.2s
+Step 34750 | Loss: 1.4034 | Grad Norm: 0.5894| LR: 0.000140 | Time: 3522.2s
+Step 34800 | Loss: 1.4026 | Grad Norm: 0.5867| LR: 0.000139 | Time: 3527.1s
+Step 34850 | Loss: 1.4554 | Grad Norm: 0.5779| LR: 0.000138 | Time: 3532.1s
+Step 34900 | Loss: 1.4916 | Grad Norm: 0.5779| LR: 0.000137 | Time: 3537.1s
+Step 34950 | Loss: 1.4230 | Grad Norm: 0.5869| LR: 0.000137 | Time: 3542.1s
+Step 35000 | Loss: 1.3674 | Grad Norm: 0.5715| LR: 0.000136 | Time: 3547.1s
+--- [验证] Step 35000 | Val Loss: 1.4147 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 35050 | Loss: 1.3535 | Grad Norm: 0.5687| LR: 0.000135 | Time: 3553.1s
+Step 35100 | Loss: 1.4371 | Grad Norm: 0.5875| LR: 0.000135 | Time: 3558.1s
+Step 35150 | Loss: 1.3946 | Grad Norm: 0.5854| LR: 0.000134 | Time: 3563.1s
+Step 35200 | Loss: 1.3998 | Grad Norm: 0.5837| LR: 0.000133 | Time: 3568.1s
+Step 35250 | Loss: 1.3387 | Grad Norm: 0.5670| LR: 0.000133 | Time: 3573.1s
+Step 35300 | Loss: 1.4486 | Grad Norm: 0.5973| LR: 0.000132 | Time: 3578.1s
+Step 35350 | Loss: 1.3774 | Grad Norm: 0.5812| LR: 0.000131 | Time: 3583.1s
+Step 35400 | Loss: 1.4719 | Grad Norm: 0.5944| LR: 0.000131 | Time: 3588.1s
+Step 35450 | Loss: 1.3689 | Grad Norm: 0.5831| LR: 0.000130 | Time: 3593.1s
+Step 35500 | Loss: 1.4657 | Grad Norm: 0.6072| LR: 0.000129 | Time: 3598.1s
+--- [验证] Step 35500 | Val Loss: 1.4112 ---
+Step 35550 | Loss: 1.4934 | Grad Norm: 0.6042| LR: 0.000129 | Time: 3603.6s
+Step 35600 | Loss: 1.4084 | Grad Norm: 0.5993| LR: 0.000128 | Time: 3608.6s
+Step 35650 | Loss: 1.3880 | Grad Norm: 0.5788| LR: 0.000127 | Time: 3613.6s
+Step 35700 | Loss: 1.4406 | Grad Norm: 0.5917| LR: 0.000127 | Time: 3618.6s
+Step 35750 | Loss: 1.3125 | Grad Norm: 0.5800| LR: 0.000126 | Time: 3623.6s
+Step 35800 | Loss: 1.3826 | Grad Norm: 0.5889| LR: 0.000126 | Time: 3628.6s
+Step 35850 | Loss: 1.5301 | Grad Norm: 0.6014| LR: 0.000125 | Time: 3633.5s
+Step 35900 | Loss: 1.3793 | Grad Norm: 0.5832| LR: 0.000124 | Time: 3638.5s
+Step 35950 | Loss: 1.3766 | Grad Norm: 0.5956| LR: 0.000124 | Time: 3643.5s
+Step 36000 | Loss: 1.4064 | Grad Norm: 0.5874| LR: 0.000123 | Time: 3648.5s
+--- [验证] Step 36000 | Val Loss: 1.4107 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 36050 | Loss: 1.4239 | Grad Norm: 0.5744| LR: 0.000123 | Time: 3654.5s
+Step 36100 | Loss: 1.5174 | Grad Norm: 0.6090| LR: 0.000122 | Time: 3659.5s
+Step 36150 | Loss: 1.3777 | Grad Norm: 0.6018| LR: 0.000121 | Time: 3664.5s
+Step 36200 | Loss: 1.3473 | Grad Norm: 0.5998| LR: 0.000121 | Time: 3669.5s
+Step 36250 | Loss: 1.3620 | Grad Norm: 0.5729| LR: 0.000120 | Time: 3674.5s
+Step 36300 | Loss: 1.2979 | Grad Norm: 0.5706| LR: 0.000120 | Time: 3679.5s
+Step 36350 | Loss: 1.4469 | Grad Norm: 0.6113| LR: 0.000119 | Time: 3684.5s
+Step 36400 | Loss: 1.4369 | Grad Norm: 0.6231| LR: 0.000119 | Time: 3689.5s
+Step 36450 | Loss: 1.3538 | Grad Norm: 0.5769| LR: 0.000118 | Time: 3694.5s
+Step 36500 | Loss: 1.3276 | Grad Norm: 0.5831| LR: 0.000118 | Time: 3699.5s
+--- [验证] Step 36500 | Val Loss: 1.4070 ---
+Step 36550 | Loss: 1.4995 | Grad Norm: 0.5900| LR: 0.000117 | Time: 3705.0s
+Step 36600 | Loss: 1.3446 | Grad Norm: 0.5883| LR: 0.000117 | Time: 3710.0s
+Step 36650 | Loss: 1.3919 | Grad Norm: 0.5931| LR: 0.000116 | Time: 3715.0s
+Step 36700 | Loss: 1.5006 | Grad Norm: 0.5988| LR: 0.000116 | Time: 3720.0s
+Step 36750 | Loss: 1.4094 | Grad Norm: 0.5971| LR: 0.000115 | Time: 3725.0s
+Step 36800 | Loss: 1.3299 | Grad Norm: 0.5993| LR: 0.000115 | Time: 3730.0s
+Step 36850 | Loss: 1.3276 | Grad Norm: 0.5907| LR: 0.000114 | Time: 3735.0s
+Step 36900 | Loss: 1.3337 | Grad Norm: 0.5814| LR: 0.000114 | Time: 3740.0s
+Step 36950 | Loss: 1.4243 | Grad Norm: 0.5792| LR: 0.000114 | Time: 3745.0s
+Step 37000 | Loss: 1.3821 | Grad Norm: 0.5849| LR: 0.000113 | Time: 3750.0s
+--- [验证] Step 37000 | Val Loss: 1.4053 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 37050 | Loss: 1.2887 | Grad Norm: 0.5823| LR: 0.000113 | Time: 3756.0s
+Step 37100 | Loss: 1.3591 | Grad Norm: 0.6002| LR: 0.000112 | Time: 3761.0s
+Step 37150 | Loss: 1.4244 | Grad Norm: 0.6096| LR: 0.000112 | Time: 3766.0s
+Step 37200 | Loss: 1.2651 | Grad Norm: 0.5788| LR: 0.000111 | Time: 3771.0s
+Step 37250 | Loss: 1.3894 | Grad Norm: 0.6061| LR: 0.000111 | Time: 3776.0s
+Step 37300 | Loss: 1.3592 | Grad Norm: 0.5698| LR: 0.000111 | Time: 3781.0s
+Step 37350 | Loss: 1.3718 | Grad Norm: 0.5932| LR: 0.000110 | Time: 3786.0s
+Step 37400 | Loss: 1.4586 | Grad Norm: 0.5937| LR: 0.000110 | Time: 3791.0s
+Step 37450 | Loss: 1.3110 | Grad Norm: 0.5844| LR: 0.000109 | Time: 3796.0s
+Step 37500 | Loss: 1.4275 | Grad Norm: 0.6112| LR: 0.000109 | Time: 3801.0s
+--- [验证] Step 37500 | Val Loss: 1.4053 ---
+Step 37550 | Loss: 1.3815 | Grad Norm: 0.6072| LR: 0.000109 | Time: 3806.5s
+Step 37600 | Loss: 1.5330 | Grad Norm: 0.6066| LR: 0.000108 | Time: 3811.5s
+Step 37650 | Loss: 1.4034 | Grad Norm: 0.6231| LR: 0.000108 | Time: 3816.5s
+Step 37700 | Loss: 1.4546 | Grad Norm: 0.6013| LR: 0.000108 | Time: 3821.5s
+Step 37750 | Loss: 1.3051 | Grad Norm: 0.6260| LR: 0.000107 | Time: 3826.5s
+Step 37800 | Loss: 1.3676 | Grad Norm: 0.5800| LR: 0.000107 | Time: 3831.5s
+Step 37850 | Loss: 1.4084 | Grad Norm: 0.5996| LR: 0.000107 | Time: 3836.5s
+Step 37900 | Loss: 1.3347 | Grad Norm: 0.5748| LR: 0.000106 | Time: 3841.5s
+Step 37950 | Loss: 1.2700 | Grad Norm: 0.5772| LR: 0.000106 | Time: 3846.5s
+Step 38000 | Loss: 1.3819 | Grad Norm: 0.6064| LR: 0.000106 | Time: 3851.5s
+--- [验证] Step 38000 | Val Loss: 1.4028 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 38050 | Loss: 1.4703 | Grad Norm: 0.6113| LR: 0.000106 | Time: 3857.4s
+Step 38100 | Loss: 1.3367 | Grad Norm: 0.5786| LR: 0.000105 | Time: 3862.4s
+Step 38150 | Loss: 1.3165 | Grad Norm: 0.5842| LR: 0.000105 | Time: 3867.4s
+Step 38200 | Loss: 1.3462 | Grad Norm: 0.5819| LR: 0.000105 | Time: 3872.3s
+Step 38250 | Loss: 1.3375 | Grad Norm: 0.5919| LR: 0.000104 | Time: 3877.3s
+Step 38300 | Loss: 1.4153 | Grad Norm: 0.6214| LR: 0.000104 | Time: 3882.3s
+Step 38350 | Loss: 1.3345 | Grad Norm: 0.5932| LR: 0.000104 | Time: 3887.3s
+Step 38400 | Loss: 1.4010 | Grad Norm: 0.6194| LR: 0.000104 | Time: 3892.3s
+Step 38450 | Loss: 1.4178 | Grad Norm: 0.5961| LR: 0.000104 | Time: 3897.3s
+Step 38500 | Loss: 1.3258 | Grad Norm: 0.6004| LR: 0.000103 | Time: 3902.3s
+--- [验证] Step 38500 | Val Loss: 1.4002 ---
+Step 38550 | Loss: 1.3965 | Grad Norm: 0.6082| LR: 0.000103 | Time: 3907.9s
+Step 38600 | Loss: 1.3753 | Grad Norm: 0.6239| LR: 0.000103 | Time: 3912.9s
+Step 38650 | Loss: 1.4483 | Grad Norm: 0.6071| LR: 0.000103 | Time: 3917.9s
+Step 38700 | Loss: 1.3995 | Grad Norm: 0.6041| LR: 0.000102 | Time: 3922.8s
+Step 38750 | Loss: 1.3530 | Grad Norm: 0.6114| LR: 0.000102 | Time: 3927.8s
+Step 38800 | Loss: 1.3843 | Grad Norm: 0.6045| LR: 0.000102 | Time: 3932.8s
+Step 38850 | Loss: 1.4253 | Grad Norm: 0.6157| LR: 0.000102 | Time: 3937.8s
+Step 38900 | Loss: 1.4238 | Grad Norm: 0.6103| LR: 0.000102 | Time: 3942.8s
+Step 38950 | Loss: 1.3448 | Grad Norm: 0.6059| LR: 0.000102 | Time: 3947.8s
+Step 39000 | Loss: 1.4251 | Grad Norm: 0.6016| LR: 0.000101 | Time: 3952.8s
+--- [验证] Step 39000 | Val Loss: 1.4001 ---
+--> 模型已保存至 ckpt/run1.pt
+Step 39050 | Loss: 1.2869 | Grad Norm: 0.5877| LR: 0.000101 | Time: 3958.8s
+Step 39100 | Loss: 1.3067 | Grad Norm: 0.5936| LR: 0.000101 | Time: 3963.8s
+Step 39150 | Loss: 1.3098 | Grad Norm: 0.5823| LR: 0.000101 | Time: 3968.8s
+Step 39200 | Loss: 1.3784 | Grad Norm: 0.6157| LR: 0.000101 | Time: 3973.8s
+Step 39250 | Loss: 1.4458 | Grad Norm: 0.6144| LR: 0.000101 | Time: 3978.7s
+Step 39300 | Loss: 1.3477 | Grad Norm: 0.6064| LR: 0.000101 | Time: 3983.7s
+Step 39350 | Loss: 1.3554 | Grad Norm: 0.5996| LR: 0.000101 | Time: 3988.7s
+Step 39400 | Loss: 1.4237 | Grad Norm: 0.6319| LR: 0.000101 | Time: 3993.7s
+Step 39450 | Loss: 1.3905 | Grad Norm: 0.5998| LR: 0.000100 | Time: 3998.7s
+Step 39500 | Loss: 1.4208 | Grad Norm: 0.6212| LR: 0.000100 | Time: 4003.7s
+--- [验证] Step 39500 | Val Loss: 1.4002 ---
+Step 39550 | Loss: 1.3973 | Grad Norm: 0.6220| LR: 0.000100 | Time: 4009.3s
+Step 39600 | Loss: 1.2947 | Grad Norm: 0.6044| LR: 0.000100 | Time: 4014.2s
+Step 39650 | Loss: 1.4331 | Grad Norm: 0.6152| LR: 0.000100 | Time: 4019.2s
+Step 39700 | Loss: 1.3836 | Grad Norm: 0.6030| LR: 0.000100 | Time: 4024.2s
+Step 39750 | Loss: 1.4505 | Grad Norm: 0.6195| LR: 0.000100 | Time: 4029.2s
+Step 39800 | Loss: 1.3167 | Grad Norm: 0.5994| LR: 0.000100 | Time: 4034.2s
+Step 39850 | Loss: 1.3321 | Grad Norm: 0.6034| LR: 0.000100 | Time: 4039.2s
+Step 39900 | Loss: 1.4306 | Grad Norm: 0.6296| LR: 0.000100 | Time: 4044.2s
+Step 39950 | Loss: 1.4191 | Grad Norm: 0.6100| LR: 0.000100 | Time: 4049.2s
+root@I2c208a6d8501e01eeb:~/cs336-assignment1# 

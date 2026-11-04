@@ -36,6 +36,8 @@ class DataConfig:
 
 @dataclass
 class TrainConfig:
+    run_name:str="base
+    runs_root:str="experiments/runs"
     total_steps: int = 40000
     seed: int = 42
     load_ckpt_path: Optional[str] = None 

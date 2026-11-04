@@ -268,6 +268,7 @@ class TokenizerTrainer:
                     self._incremental_merge(worker_result)
                 pbar.update(1)
         finally:
+            gc.enable()
             pbar.close()
             pool.close()
             pool.join()
@@ -277,7 +278,7 @@ class TokenizerTrainer:
         del self.token_freqs
 
         # 5. 恢复 gc，确保内存回收正常
-        gc.enable()
+   
         gc.collect()
 
         # 6. 初始化 byte pair 计数并迭代合并
@@ -291,30 +292,24 @@ class TokenizerTrainer:
 
         return self.vocab, self.merges
 
+
     @staticmethod
     def pretokenize_file_offset(args):
-        """子进程入口：自行读取文本块并预分词，返回 {token_tuple: count}。"""
         file_path, start, end, special_tokens_list = args
-        try:
-            with open(file_path, "rb") as f:
-                f.seek(start)
-                chunk_bytes = f.read(end - start)
-                chunk_str = chunk_bytes.decode("utf-8", errors="ignore")
-
-            pre_tokens = {}
-            concat_special_tokens = "|".join(re.escape(t) for t in special_tokens_list) if special_tokens_list else None
-            segments = re.split(concat_special_tokens, chunk_str) if concat_special_tokens else [chunk_str]
-            for seg in segments:
-                for m in re.finditer(PAT, seg):
-                    pre_token = tuple(m.group().encode("utf-8"))
-                    pre_tokens[pre_token] = pre_tokens.get(pre_token, 0) + 1
-            return pre_tokens
-
-        except Exception as e:
-            print(f"Error in process {os.getpid()}: {e}")
-            print(traceback.format_exc())
-            return None
-
+        with open(file_path, "rb") as f:
+            f.seek(start)
+            chunk_bytes = f.read(end - start)
+        chunk_str = chunk_bytes.decode("utf-8", errors="ignore")
+    
+        pre_tokens = {}
+        concat_special_tokens = "|".join(re.escape(t) for t in special_tokens_list) if special_tokens_list else None
+        segments = re.split(concat_special_tokens, chunk_str) if concat_special_tokens else [chunk_str]
+        for seg in segments:
+            for m in re.finditer(PAT, seg):
+                pre_token = tuple(m.group().encode("utf-8"))
+                pre_tokens[pre_token] = pre_tokens.get(pre_token, 0) + 1
+        return pre_tokens
+        
     def _incremental_merge(self, worker_result):
         """将单个子进程的结果合并到主进程的 token_freqs。"""
         for token_bytes, count in worker_result.items():
@@ -343,12 +338,10 @@ class TokenizerTrainer:
         self.merge(pair, new_index)
 
     def merge(self, pair, new_index):
-        # ① 快照 + 过滤死索引（同时天然去重，因为 [1] 已是 set）
-        #    并顺手做"仍含 pair"检查：不含的直接丢弃
+        # ① 快照 + 过滤死索引
         alive = []
         for idx in self.bp_freq[pair][1]:
             tokens = self.pre_tokens[idx][0]
-            # 快速判断 tokens 里是否还存在相邻的 (pair[0], pair[1])
             found = False
             for j in range(len(tokens) - 1):
                 if tokens[j] == pair[0] and tokens[j + 1] == pair[1]:
@@ -356,23 +349,32 @@ class TokenizerTrainer:
                     break
             if found:
                 alive.append(idx)
-
-        # ② 立即清空：后面若产生 new_pair == pair 的登记，会重新 add 进来；
-        #    而已处理的活索引处理完必不再含 pair，不该留在列表里
+    
+        # ② 立即清空反向索引（清空后只靠计数，不再 pop 计数键）
         self.bp_freq[pair][1].clear()
-
-        # ③ 逐个处理活索引（逻辑同原版，只把 append 换成 add）
-        for have_pair_token_index in alive:
-            if pair not in self.bp_freq:      # 计数已归零，剩余活索引不再有贡献
-                break
-            bytestr = self.pre_tokens[have_pair_token_index][0]
-            new_pre_token = bytestr
+    
+        dirty = set()   # 待清理的键（计数 <= 0，延后删除）
+    
+        def _dec(k):
+            """对 k 的计数减 pre_count，<=0 记入 dirty，不立即删。"""
+            if k in self.bp_freq:
+                self.bp_freq[k][0] -= pre_count
+                if self.bp_freq[k][0] <= 0:
+                    dirty.add(k)
+    
+        # ③ 逐个处理（循环期间不删任何 bp_freq 键）
+        for pos, have_pair_token_index in enumerate(alive):
+            if pair not in self.bp_freq:
+                raise RuntimeError(
+                    f"不变式破坏：pair={pair} 在处理第 {pos}/{len(alive)} 个时消失"
+                )
+    
+            new_pre_token = self.pre_tokens[have_pair_token_index][0]
             pre_count = self.pre_tokens[have_pair_token_index][1]
-
+    
             i = 0
             while i < len(new_pre_token) - 1:
-                slid_window = new_pre_token[i:i + 2]
-                if pair == slid_window:
+                if pair == new_pre_token[i:i + 2]:
                     # 左邻居
                     if i > 0:
                         new_pair = (new_pre_token[i - 1], new_index)
@@ -381,12 +383,8 @@ class TokenizerTrainer:
                         else:
                             self.bp_freq[new_pair][0] += pre_count
                             self.bp_freq[new_pair][1].add(have_pair_token_index)
-
-                        overlap_pair = (new_pre_token[i - 1], pair[0])
-                        self.bp_freq[overlap_pair][0] -= pre_count
-                        if self.bp_freq[overlap_pair][0] <= 0:
-                            self.bp_freq.pop(overlap_pair, None)
-
+                        _dec((new_pre_token[i - 1], pair[0]))
+    
                     # 右邻居
                     if i + 2 < len(new_pre_token):
                         new_pair = (new_index, new_pre_token[i + 2])
@@ -395,24 +393,57 @@ class TokenizerTrainer:
                         else:
                             self.bp_freq[new_pair][0] += pre_count
                             self.bp_freq[new_pair][1].add(have_pair_token_index)
-
-                        overlap_pair = (pair[1], new_pre_token[i + 2])
-                        self.bp_freq[overlap_pair][0] -= pre_count
-                        if self.bp_freq[overlap_pair][0] <= 0:
-                            self.bp_freq.pop(overlap_pair, None)
-
-                    # pair 自身计数减少（注意：此时 pair 的 [1] 已 clear，
-                    # 若减到 0 直接 pop 整个 pair 即可）
-                    self.bp_freq[pair][0] -= pre_count
-                    if self.bp_freq[pair][0] <= 0:
-                        self.bp_freq.pop(pair, None)
-
-                    # 就地合并
+                        _dec((pair[1], new_pre_token[i + 2]))
+    
+                    # pair 自身
+                    _dec(pair)
+    
                     new_pre_token = new_pre_token[:i] + (new_index,) + new_pre_token[i + 2:]
-
+    
                 i += 1
-
+    
             self.pre_tokens[have_pair_token_index][0] = new_pre_token
+    
+        # ④ 统一清理
+        for k in dirty:
+            if k in self.bp_freq and self.bp_freq[k][0] <= 0:
+                del self.bp_freq[k]
+    
+        # ⑤ 自检：pair 计数应归零（若还有，说明记账有误）
+        assert self.bp_freq.get(pair, [0])[0] <= 0, (
+            f"{pair} 计数没归零：{self.bp_freq.get(pair)}"
+        )
+
+from array import array
+
+# ---------------- worker 进程级状态（每个进程独立一份） ----------------
+_WORKER_TOK = None
+_WORKER_CACHE = None
+
+
+def _init_encode_worker(tokenizer_state):
+    """Pool initializer：每个 worker 进程建一次 Tokenizer + 空 cache。"""
+    global _WORKER_TOK, _WORKER_CACHE
+    vocab, merges, special_tokens = tokenizer_state
+    _WORKER_TOK = Tokenizer(vocab, merges, special_tokens)
+    _WORKER_CACHE = {}
+
+
+def _encode_range_worker(args):
+    """
+    args = (path, start, end)
+    独立 open+seek+read（左闭右开 read(end-start)），二进制读 + 自己 decode。
+    返回 array('I')（vocab_size <= 65535 可用 'H'）。
+    """
+    path, start, end = args
+    with open(path, "rb") as f:
+        f.seek(start)
+        chunk_bytes = f.read(end - start)          # 左闭右开
+    text = chunk_bytes.decode("utf-8", errors="ignore")
+
+    ids = _WORKER_TOK._encode_with_cache(text, _WORKER_CACHE)
+    return array('I', ids)
+    
 class Tokenizer:
     def __init__(self, vocab: dict[int, bytes], merges: list[tuple[bytes, bytes]], special_tokens: list[str] = None):
         self.vocab = vocab
@@ -420,7 +451,6 @@ class Tokenizer:
         self.special_tokens = special_tokens
         # 1. 建立反向映射表
         self.vocab_to_id = {v: k for k, v in self.vocab.items()}
-        self.merge_ranks = {pair: i for i, pair in enumerate(merges)}
         # 2. 处理 special_tokens
         if self.special_tokens:
             # 去重 + 按长度降序，长 token 优先匹配
@@ -541,63 +571,28 @@ class Tokenizer:
     # 重写 encode: 先收集 unique pretoken, 再批量 merge, 最后按序列展开
     # ------------------------------------------------------------------
     def encode(self, text: str) -> list[int]:
-        ids = []
-        if self.special_pattern:
-            chunks = re.split(self.special_pattern, text)
-        else:
-            chunks = [text]
-
-        # ① 收集本块所有 unique pretoken, 并记录出现顺序
-        pre_tokens = {}          # {pretoken_bytes: [单字节, ...]}
-        pre_tokens_seq = []      # 按出现顺序: bytes(普通) 或 str(特殊)
-
-        for chunk in chunks:
-            if not chunk:
-                continue
-            if self.special_tokens and chunk in self.special_tokens:
-                pre_tokens_seq.append(chunk)      # str 标记特殊 token
-                continue
-            for match in re.finditer(PAT, chunk):
-                b_word = match.group().encode('utf-8')
-                if b_word not in pre_tokens:
-                    pre_tokens[b_word] = [b_word[i:i+1] for i in range(len(b_word))]
-                pre_tokens_seq.append(b_word)      # bytes 普通 pretoken
-
-        # ② 批量 merge (unique pretoken 只算一次)
-        merged_map = self.merge_pretokens_batch(pre_tokens)
-
-        # ③ 按序列展开成 id
-        for item in pre_tokens_seq:
-            if isinstance(item, str):              # 特殊 token
-                ids.append(self.vocab_to_id[item.encode('utf-8')])
-            else:                                  # 普通 pretoken
-                for token in merged_map[item]:
-                    ids.append(self.vocab_to_id[token])
-
-        return ids
+        return self._encode_with_cache(text, {})
 
     # ------------------------------------------------------------------
     # encode_iterable 保持原样（偏移已修好）
     # ------------------------------------------------------------------
     def encode_iterable(self, iterable):
-        """
-        流式编码：跨 chunk 复用 cache，重复 pretoken 全局只 merge 一次。
-        """
+        """流式编码：跨 chunk 复用 cache，重复 pretoken 全局只 merge 一次。"""
         chunk_size = 1 * 1024 ** 2
-        cache = {}                       # {pretoken_bytes: tuple}
+        cache = {}
         file_pos = 0
-
+    
         max_special_len = len(max(self.special_tokens, key=len)) if self.special_tokens else 0
-
+    
         while True:
             chunk = iterable.read(chunk_size)
             if not chunk:
                 break
-
+    
             is_last_chunk = len(chunk) < chunk_size
             original_chunk = chunk
-
-            # ---- 截断：保证不切断特殊 token / 最后一个 pretoken ----
+    
+            # ---- 截断 ----
             if not is_last_chunk:
                 if self.special_tokens:
                     concat_special_tokens = "|".join(re.escape(t) for t in self.special_tokens)
@@ -615,18 +610,19 @@ class Tokenizer:
                     pretokens = re.findall(PAT, chunk)
                     if pretokens:
                         chunk = chunk[:-len(pretokens[-1])]
-
+    
                 if not chunk:
-                    chunk = original_chunk       # 兜底：截没了就退回原块
-
+                    chunk = original_chunk
+    
             chunk_len = len(chunk)
             if chunk_len == 0:
                 break
-
-            # 指针推进：直接从 file_pos 推 chunk_len
-            file_pos += len(chunk.encode(iterable.encoding or "utf-8"))
+    
+            # ---- 指针推进：字符数 -> 字节位置 ----
             iterable.seek(file_pos)
-
+            iterable.read(chunk_len)
+            file_pos = iterable.tell()
+    
             for tid in self._encode_with_cache(chunk, cache):
                 yield tid
     # ------------------------------------------------------------------
@@ -642,3 +638,43 @@ class Tokenizer:
 
         b = b"".join(byte_parts)
         return b.decode("utf-8", errors="replace")
+
+
+
+    # ------------------------------------------------------------------
+    # 并行编码：按 chunk 返回 array（推荐，主进程整块写文件）
+    # ------------------------------------------------------------------
+    def iter_chunks_parallel(self, path: str, n_workers: int = 8,
+                             split_special_token: bytes = b"<|endoftext|>"):
+        """
+        并行编码整个文件，按顺序 yield 每个 range 的 array('I')。
+        用仓库的 find_chunk_boundaries 切点（切在 special token 起点，左闭右开读取）。
+        """
+        with open(path, "rb") as f:
+            boundaries = find_chunk_boundaries(f, n_workers, split_special_token)
+
+        ranges = [(path, boundaries[i], boundaries[i + 1])
+                  for i in range(len(boundaries) - 1)]
+        if not ranges:
+            return
+
+        tokenizer_state = (self.vocab, self.merges, self.special_tokens)
+        proc = min(n_workers, len(ranges))
+
+        with multiprocessing.Pool(
+            processes=proc,
+            initializer=_init_encode_worker,
+            initargs=(tokenizer_state,),
+        ) as pool:
+            # imap 保序；结果按 ranges 顺序返回
+            for arr in pool.imap(_encode_range_worker, ranges, chunksize=1):
+                yield arr
+
+    # ------------------------------------------------------------------
+    # 并行编码：逐 id yield（方便流式消费，但逐 id 写文件慢）
+    # ------------------------------------------------------------------
+    def encode_file_parallel(self, path: str, n_workers: int = 8,
+                             split_special_token: bytes = b"<|endoftext|>"):
+        for arr in self.iter_chunks_parallel(path, n_workers, split_special_token):
+            for tid in arr:
+                yield tid

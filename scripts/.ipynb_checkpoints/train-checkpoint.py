@@ -68,10 +68,10 @@ def train():
         
     data = np.load(cfg.data.train_path, mmap_mode='r')
 
-    # start_step = 0
-    # if cfg.load_ckpt_path and os.path.exists(cfg.load_ckpt_path):
-    #     start_step = load_checkpoint(cfg.load_ckpt_path, model, optimizer) + 1
-    #     print(f"从第 {start_step} 步恢复训练！")
+    start_step = 0
+    if cfg.load_ckpt_path and os.path.exists(cfg.load_ckpt_path):
+        start_step = load_checkpoint(cfg.load_ckpt_path, model, optimizer) + 1
+        print(f"从第 {start_step} 步恢复训练！")
 
     model.train()
     start_time = time.time()
@@ -124,7 +124,7 @@ def train():
         
         if step % cfg.log_interval == 0:
             elapsed = time.time() - start_time
-            print(f"Step {step:05d} | Loss: {loss.item():.4f} | Grad Norm: {grad_norm:.2f}| LR: {current_lr:.6f} | Time: {elapsed:.1f}s")
+            print(f"Step {step:05d} | Loss: {loss.item():.4f} | Grad Norm: {grad_norm:.4f}| LR: {current_lr:.6f} | Time: {elapsed:.1f}s")
            
             
         if val_data is not None and step > 0 and step % cfg.eval_interval == 0:
@@ -140,4 +140,5 @@ def train():
             print(f"--> 模型已保存至 {cfg.save_ckpt_path}")
 
 if __name__ == "__main__":
+    torch.set_float32_matmul_precision('high')
     train()
