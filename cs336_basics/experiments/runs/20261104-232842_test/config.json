@@ -1,0 +1,39 @@
+{
+  "run_name": "base",
+  "runs_root": "experiments/runs",
+  "total_steps": 40000,
+  "seed": 42,
+  "load_ckpt_path": null,
+  "save_ckpt_path": "ckpt/run1.pt",
+  "log_interval": 50,
+  "eval_interval": 500,
+  "save_interval": 1000,
+  "eval_batches": 20,
+  "model": {
+    "vocab_size": 10000,
+    "context_length": 256,
+    "d_model": 512,
+    "num_layers": 4,
+    "num_heads": 16,
+    "d_ff": 1344,
+    "rope_theta": 10000.0
+  },
+  "optimizer": {
+    "lr": 0.001,
+    "min_lr": 0.0001,
+    "beta1": 0.9,
+    "beta2": 0.95,
+    "eps": 1e-08,
+    "weight_decay": 0.1,
+    "grad_clip": 1.0
+  },
+  "schedule": {
+    "warmup_iters": 1000,
+    "cosine_cycle_iters": 40000
+  },
+  "data": {
+    "train_path": "/root/cs336-assignment1/data/processed/ts_train_ids.npy",
+    "val_path": "/root/cs336-assignment1/data/processed/ts_valid_ids.npy",
+    "batch_size": 32
+  }
+}
