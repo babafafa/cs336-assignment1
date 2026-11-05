@@ -8,3 +8,4 @@ ckpt/
 .DS_Store
 *.log
 temporary/
+.ipynb_checkpoints/
