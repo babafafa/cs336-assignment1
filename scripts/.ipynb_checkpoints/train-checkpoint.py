@@ -2,6 +2,9 @@ import torch
 import numpy as np
 import os
 import time
+import argparse
+import wandb
+from dataclasses import asdict
 from cs336_basics.config import TrainConfig 
 from cs336_basics.model import TransformerLM, AdamW 
 from cs336_basics.data import get_batch
@@ -32,14 +35,52 @@ def evaluate(model, data, vocab_size, batch_size, context_length, device, eval_s
     
 
 def train():
-    
+
     cfg = TrainConfig()
-    cfg.validate()
-    
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--run-name",type=str,default="default_run")
+    parser.add_argument("--lr", type=float, default=None, help="Peak learning rate")
+    parser.add_argument("--total-steps", type=int, default=None, help="Total training steps")
+    parser.add_argument("--warmup-iters", type=int, default=None, help="Warmup iters")
+    parser.add_argument("--batch-size", type=int, default=None, help="Batch size")
+    parser.add_argument("--save-ckpt-path", type=str, default=None, help="Checkpoint path")
+
+    args = parser.parse_args()
+
+    # 3. 如果命令行传了参数，就覆盖掉默认的 cfg
+    if args.run_name is not None:
+        cfg.run_name = args.run_name
+    if args.lr is not None:
+        cfg.optimizer.lr = args.lr
+        cfg.optimizer.min_lr = args.lr / 10.0
+
+    if args.batch_size is not None:
+        cfg.data.batch_size = args.batch_size
+    if args.save_ckpt_path is not None:
+        cfg.save_ckpt_path = args.save_ckpt_path
+    if args.total_steps is not None:
+        cfg.total_steps = args.total_steps
+        cfg.schedule.cosine_cycle_iters = args.total_steps
+    if args.warmup_iters is not None:
+        cfg.schedule.warmup_iters = args.warmup_iters
+    else:
+        cfg.schedule.warmup_iters = int(cfg.total_steps * 0.05)
+
+    # 4. 用 run_name 自动生成 checkpoint 路径，防止互相覆盖
+    if args.save_ckpt_path is None:
+        cfg.save_ckpt_path = f"ckpt/{cfg.run_name}.pt"
+        
+    cfg.validate()   
     device = "cuda" if torch.cuda.is_available() else "cpu"
     run_dir=make_run_dir(cfg.runs_root,cfg.run_name)
-    cfg.save_ckpt_path=str(run_dir/"ckpt.pt")
     save_config(cfg,run_dir)
+        
+    wandb.init(
+    project="cs336-assignment1", 
+    name=args.run_name, 
+    config=asdict(cfg) # 自动把超参数记录下来
+)
+
     
     np.random.seed(cfg.seed)
     torch.manual_seed(cfg.seed)
@@ -79,52 +120,73 @@ def train():
 
     model.train()
     start_time = time.perf_counter()
-    for step in range(start_step, cfg.total_steps):
-        current_lr = lr_cosine_schedule(
-            step, cfg.optimizer.lr, cfg.optimizer.min_lr, 
-            cfg.schedule.warmup_iters, cfg.schedule.cosine_cycle_iters
-        )
-        
-        for param_group in optimizer.param_groups:
-            param_group['lr'] = current_lr
+    try:
+        for step in range(start_step, cfg.total_steps):
+            current_lr = lr_cosine_schedule(
+                step, cfg.optimizer.lr, cfg.optimizer.min_lr, 
+                cfg.schedule.warmup_iters, cfg.schedule.cosine_cycle_iters
+            )
+            
+            for param_group in optimizer.param_groups:
+                param_group['lr'] = current_lr
 
-        X, Y = get_batch(data, cfg.data.batch_size, cfg.model.context_length, device)
-        
-        logits = model(X)
-
-        loss = cross_entropy(logits.reshape(-1, cfg.model.vocab_size), Y.reshape(-1))
-        
-        optimizer.zero_grad()
-        loss.backward()
-        
-    
-        grad_norm=gradient_clipping(model.parameters(), cfg.optimizer.grad_clip)
-        optimizer.step()
-        
-        if step % cfg.log_interval == 0 or (val_data is not None and step > 0 and step % cfg.eval_interval == 0):
+            X, Y = get_batch(data, cfg.data.batch_size, cfg.model.context_length, device)
+            logits = model(X)
+            loss = cross_entropy(logits.reshape(-1, cfg.model.vocab_size), Y.reshape(-1))
+            
+            optimizer.zero_grad()
+            loss.backward()
+            grad_norm = gradient_clipping(model.parameters(), cfg.optimizer.grad_clip)
+            optimizer.step()
+            
+            # 1. 整理 record 字典
             record = {
-                "step": step,
+                "step": step, 
                 "wall_time_s": time.perf_counter() - start_time,
                 "tokens_seen": (step + 1) * cfg.data.batch_size * cfg.model.context_length,
                 "train_loss": float(loss),
                 "lr": float(current_lr),
                 "grad_norm": float(grad_norm),
             }
-        if val_data is not None and step > 0 and step % cfg.eval_interval == 0:
-            val_loss = evaluate(
-                model, val_data, cfg.model.vocab_size, 
-                cfg.data.batch_size, cfg.model.context_length, device, 
-                cfg.eval_batches
-            )
-            record["val_loss"] = float(val_loss)
+
+            is_log_step = (step % cfg.log_interval == 0)
+            is_eval_step = (val_data is not None and step > 0 and step % cfg.eval_interval == 0)
+
+            if is_eval_step:
+                val_loss = evaluate(
+                    model, val_data, cfg.model.vocab_size, 
+                    cfg.data.batch_size, cfg.model.context_length, device, 
+                    cfg.eval_batches
+                )
+                record["val_loss"] = float(val_loss)
+
+            # 2. 如果是记录节点，同步写入 Wandb 和 本地 jsonl
+            if is_log_step or is_eval_step:
+                if is_log_step:
+                    print(f"Step {step:05d} | Loss: {loss.item():.4f} | LR: {current_lr:.6f} | Grad Norm: {grad_norm:.2f}")
+                if is_eval_step:
+                    print(f"--- [验证] Step {step:05d} | Val Loss: {record['val_loss']:.4f} ---")
+                
+                wandb_record = record.copy()
+                wandb_record.pop("step", None) 
+                wandb.log(wandb_record, step=step)
+                
+                append_metrics(run_dir, record)
+                
+            # 3. 存档
+            if step > 0 and step % save_interval == 0:
+                save_checkpoint(model, optimizer, step, cfg.save_ckpt_path)
+                print(f"--> 模型已保存至 {cfg.save_ckpt_path}")
+
+    except KeyboardInterrupt:
+        print("\n检测到 Ctrl+C，正在安全停止训练...")
+        # 可以在中断时也保存一个 checkpoint 保底
+        save_checkpoint(model, optimizer, step, f"{cfg.save_ckpt_path}.interrupted")
+        print(f"--> 中断模型已保存至 {cfg.save_ckpt_path}.interrupted")
         
-        append_metrics(run_dir, record)
-
-            
-        if step > 0 and step % cfg.save_interval == 0:
-            save_checkpoint(model, optimizer, step, cfg.save_ckpt_path)
-            print(f"--> 模型已保存至 {cfg.save_ckpt_path}")
-
+    finally:
+        # 无论怎么退出，都干净地关闭 wandb
+        wandb.finish()
 if __name__ == "__main__":
     torch.set_float32_matmul_precision('high')
     train()
