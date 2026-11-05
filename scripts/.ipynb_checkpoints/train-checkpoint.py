@@ -38,6 +38,7 @@ def train():
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     run_dir=make_run_dir(cfg.runs_root,cfg.run_name)
+    cfg.save_ckpt_path=str(run_dir/"ckpt.pt")
     save_config(cfg,run_dir)
     
     np.random.seed(cfg.seed)
@@ -77,7 +78,7 @@ def train():
         print(f"从第 {start_step} 步恢复训练！")
 
     model.train()
-    start_time = time.time()
+    start_time = time.perf_counter()
     for step in range(start_step, cfg.total_steps):
         current_lr = lr_cosine_schedule(
             step, cfg.optimizer.lr, cfg.optimizer.min_lr, 
@@ -101,11 +102,11 @@ def train():
         optimizer.step()
         
         if step % cfg.log_interval == 0 or (val_data is not None and step > 0 and step % cfg.eval_interval == 0):
-            elapsed = time.time() - start_time
             record = {
                 "step": step,
-                "time": elapsed,
-                "train_loss": float(train_loss),
+                "wall_time_s": time.perf_counter() - start_time,
+                "tokens_seen": (step + 1) * cfg.data.batch_size * cfg.model.context_length,
+                "train_loss": float(loss),
                 "lr": float(current_lr),
                 "grad_norm": float(grad_norm),
             }
@@ -116,7 +117,8 @@ def train():
                 cfg.eval_batches
             )
             record["val_loss"] = float(val_loss)
-            append_metrics(run_dir, record)
+        
+        append_metrics(run_dir, record)
 
             
         if step > 0 and step % cfg.save_interval == 0:

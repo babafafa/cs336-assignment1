@@ -41,7 +41,7 @@ class TrainConfig:
     total_steps: int = 40000
     seed: int = 42
     load_ckpt_path: Optional[str] = None 
-    save_ckpt_path: str = "ckpt/run1.pt"
+    save_ckpt_path: str = "ckpt/ckpt.pt"
     
     log_interval: int = 50
     eval_interval: int = 500

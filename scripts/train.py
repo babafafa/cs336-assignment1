@@ -2,6 +2,7 @@ import torch
 import numpy as np
 import os
 import time
+import argparse
 from cs336_basics.config import TrainConfig 
 from cs336_basics.model import TransformerLM, AdamW 
 from cs336_basics.data import get_batch
@@ -34,8 +35,40 @@ def evaluate(model, data, vocab_size, batch_size, context_length, device, eval_s
 def train():
     
     cfg = TrainConfig()
-    cfg.validate()
-    
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--run-name",type=str,default="default_run")
+    parser.add_argument("--lr", type=float, default=None, help="Peak learning rate")
+    parser.add_argument("--total-steps", type=int, default=None, help="Total training steps")
+    parser.add_argument("--warmup-iters", type=int, default=None, help="Warmup iters")
+    parser.add_argument("--batch-size", type=int, default=None, help="Batch size")
+    parser.add_argument("--save-ckpt-path", type=str, default=None, help="Checkpoint path")
+
+    args = parser.parse_args()
+
+    # 3. 如果命令行传了参数，就覆盖掉默认的 cfg
+    if args.lr is not None:
+        cfg.optimizer.lr = args.lr
+    if args.warmup_iters is not None:
+        cfg.schedule.warmup_iters = args.warmup_iters
+    if args.batch_size is not None:
+        cfg.data.batch_size = args.batch_size
+    if args.save_ckpt_path is not None:
+        cfg.save_ckpt_path = args.save_ckpt_path
+        
+    # 【极其重要】：如果你传了 total_steps，必须同步修改 cosine_cycle_iters
+    if args.total_steps is not None:
+        cfg.total_steps = args.total_steps
+        # 如果用户没显式指定 cosine_cycle_iters，就让它等于 total_steps
+        if args.cosine_cycle_iters is not None:
+            cfg.schedule.cosine_cycle_iters = args.cosine_cycle_iters
+        else:
+            cfg.schedule.cosine_cycle_iters = args.total_steps
+
+    # 4. 用 run_name 自动生成 checkpoint 路径，防止互相覆盖
+    if args.save_ckpt_path is None:
+        cfg.save_ckpt_path = f"ckpt/{args.run_name}.pt"
+        
+    cfg.validate()   
     device = "cuda" if torch.cuda.is_available() else "cpu"
     run_dir=make_run_dir(cfg.runs_root,cfg.run_name)
     save_config(cfg,run_dir)
@@ -77,7 +110,7 @@ def train():
         print(f"从第 {start_step} 步恢复训练！")
 
     model.train()
-    start_time = time.time()
+    start_time = time.perf_counter()
     for step in range(start_step, cfg.total_steps):
         current_lr = lr_cosine_schedule(
             step, cfg.optimizer.lr, cfg.optimizer.min_lr, 
@@ -101,11 +134,11 @@ def train():
         optimizer.step()
         
         if step % cfg.log_interval == 0 or (val_data is not None and step > 0 and step % cfg.eval_interval == 0):
-            elapsed = time.time() - start_time
             record = {
                 "step": step,
-                "time": elapsed,
-                "train_loss": float(train_loss),
+                "wall_time_s": time.perf_counter() - start_time,
+                "tokens_seen": (step + 1) * cfg.data.batch_size * cfg.model.context_length,
+                "train_loss": float(loss),
                 "lr": float(current_lr),
                 "grad_norm": float(grad_norm),
             }
@@ -116,7 +149,8 @@ def train():
                 cfg.eval_batches
             )
             record["val_loss"] = float(val_loss)
-            append_metrics(run_dir, record)
+        
+        append_metrics(run_dir, record)
 
             
         if step > 0 and step % cfg.save_interval == 0:
